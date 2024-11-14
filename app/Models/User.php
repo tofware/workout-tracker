@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\ExperienceLevel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -49,5 +50,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'experience_level' => ExperienceLevel::class
         ];
+    }
+
+    public function workouts(): HasMany
+    {
+        return $this->hasMany(Workout::class);
     }
 }
