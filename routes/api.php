@@ -39,5 +39,5 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('categories', CategoryController::class);
+    Route::apiResource('categories', CategoryController::class);
 });

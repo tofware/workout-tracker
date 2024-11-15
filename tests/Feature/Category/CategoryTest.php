@@ -113,39 +113,6 @@ class CategoryTest extends TestCase
         $response->assertStatus(401);
     }
 
-    public function test_logged_in_user_can_see_edit_category_info()
-    {
-        $this->authenticateUser();
-
-        $category = Category::factory()->create();
-
-        $response = $this->get('/api/categories/' . $category->id . '/edit');
-
-        $response->assertStatus(200)
-            ->assertJsonStructure([
-                'data' => [
-                    'id',
-                    'name',
-                ],
-            ]);
-    }
-    public function test_logged_in_user_cannot_see_edit_of_missing_category_info()
-    {
-        $this->authenticateUser();
-
-        $response = $this->get('/api/categories/2/edit');
-
-        $response->assertStatus(404);
-    }
-    public function test_logged_out_user_cannot_see_edit_category_info()
-    {
-        $category = Category::factory()->create();
-
-        $response = $this->get('/api/categories/' . $category->id . '/edit');
-
-        $response->assertStatus(401);
-    }
-
     public function test_logged_in_user_can_update_category()
     {
         $this->authenticateUser();
