@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Workout;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,9 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       User::factory()->hasWorkouts(3)->create([
-           'email' => 'test@test.com',
-           'password' => 'password'
-       ]);
+        User::factory()
+            ->hasWorkouts(3)
+            ->create([
+            'email' => 'test@test.com',
+            'password' => 'password'
+        ]);
     }
 }

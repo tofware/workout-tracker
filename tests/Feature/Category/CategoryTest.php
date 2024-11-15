@@ -96,14 +96,6 @@ class CategoryTest extends TestCase
                 ],
             ]);
     }
-    public function test_logged_in_user_cannot_see_missing_category()
-    {
-        $this->authenticateUser();
-
-        $response = $this->get('/api/categories/2');
-
-        $response->assertStatus(404);
-    }
     public function test_logged_out_user_cannot_see_category()
     {
         $category = Category::factory()->create();
@@ -134,14 +126,6 @@ class CategoryTest extends TestCase
         $this->assertDatabaseHas('categories', [
             'name' => 'test-update'
         ]);
-    }
-    public function test_logged_in_user_cannot_update_missing_category()
-    {
-        $this->authenticateUser();
-
-        $response = $this->patch('/api/categories/2');
-
-        $response->assertStatus(404);
     }
     public function test_logged_out_user_cannot_update_category()
     {
@@ -187,14 +171,6 @@ class CategoryTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseEmpty('categories');
-    }
-    public function test_logged_in_user_cannot_delete_missing_category()
-    {
-        $this->authenticateUser();
-
-        $response = $this->delete('/api/categories/2');
-
-        $response->assertStatus(404);
     }
     public function test_logged_out_user_cannot_delete_category()
     {

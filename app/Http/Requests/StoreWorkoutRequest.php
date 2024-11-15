@@ -23,7 +23,7 @@ class StoreWorkoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:100'],
+            'name' => ['required', 'min:0', 'max:100'],
             'category_id' => ['required', 'exists:App\Models\Category,id']
         ];
     }

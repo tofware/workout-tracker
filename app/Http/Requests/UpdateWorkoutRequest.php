@@ -23,8 +23,8 @@ class UpdateWorkoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'max:100'],
-            'category_id' => ['nullable', 'exists:App\Models\Category,id']
+            'name' => ['required', 'min:0', 'max:100'],
+            'category_id' => ['required', 'exists:App\Models\Category,id']
         ];
     }
 }

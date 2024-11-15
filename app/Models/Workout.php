@@ -39,7 +39,9 @@ class Workout extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'category_id',
+        'user_id'
     ];
 
     public function category(): BelongsTo
