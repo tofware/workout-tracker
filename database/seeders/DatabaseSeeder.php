@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Equipment;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Workout;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@test.com',
             'password' => 'password'
         ]);
+
+        Equipment::factory(3)->create();
     }
 }
