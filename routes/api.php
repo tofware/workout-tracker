@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\MuscleGroupController;
 use App\Http\Controllers\WorkoutController;
 use Illuminate\Http\Request;
@@ -46,4 +47,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('workouts', WorkoutController::class);
     Route::apiResource('equipments', EquipmentController::class);
     Route::apiResource('muscle-groups', MuscleGroupController::class);
+    Route::apiResource('exercises', ExerciseController::class);
 });

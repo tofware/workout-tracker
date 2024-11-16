@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Equipment;
-use App\Models\MuscleGroup;
+use App\Models\Exercise;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'password'
         ]);
 
-        Equipment::factory(3)->create();
-        MuscleGroup::factory(10)->create();
+        Exercise::factory(10)
+            ->create();
     }
 }
