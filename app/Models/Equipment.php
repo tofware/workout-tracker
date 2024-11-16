@@ -9,12 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- *
+ * 
  *
  * @method static EquipmentFactory factory($count = null, $state = [])
  * @method static Builder<static>|Equipment newModelQuery()
  * @method static Builder<static>|Equipment newQuery()
  * @method static Builder<static>|Equipment query()
+ * @property int $id
+ * @property string $name
+ * @method static Builder<static>|Equipment whereId($value)
+ * @method static Builder<static>|Equipment whereName($value)
  * @mixin Eloquent
  */
 class Equipment extends Model
