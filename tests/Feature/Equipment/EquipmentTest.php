@@ -141,24 +141,6 @@ class EquipmentTest extends TestCase
             'name' => 'test-update'
         ]);
     }
-    public function test_logged_in_user_cannot_update_equipment_with_empty_name()
-    {
-        $this->authenticateUser();
-
-        $equipment = Equipment::factory()->create();
-
-        $response = $this->patch('/api/equipments/' . $equipment->id, [
-            'name' => null
-        ]);
-
-        $response->assertStatus(422);
-
-        $response->assertJsonValidationErrors(['name']);
-
-        $this->assertDatabaseHas('equipments', [
-            'name' => $equipment->name
-        ]);
-    }
 
     public function test_logged_in_user_can_delete_equipment()
     {

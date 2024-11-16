@@ -23,7 +23,7 @@ class UpdateEquipmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:0', 'max:100']
+            'name' => ['sometimes', 'min:0', 'max:100']
         ];
     }
 }

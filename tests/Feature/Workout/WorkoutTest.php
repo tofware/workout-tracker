@@ -155,23 +155,6 @@ class WorkoutTest extends TestCase
             'name' => 'test-update'
         ]);
     }
-    public function test_logged_in_user_cannot_update_workout_with_empty_name()
-    {
-        $this->authenticateUser();
-
-        $workout = Workout::factory()->create();
-
-        $response = $this->patch('/api/workouts/' . $workout->id);
-
-        $response->assertStatus(422);
-
-        $response->assertJsonValidationErrors(['name']);
-        $response->assertJsonValidationErrors(['category_id']);
-
-        $this->assertDatabaseHas('workouts', [
-            'name' => $workout->name
-        ]);
-    }
 
     public function test_logged_in_user_can_delete_workout()
     {
