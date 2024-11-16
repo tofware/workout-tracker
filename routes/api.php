@@ -11,6 +11,7 @@ use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\MuscleGroupController;
 use App\Http\Controllers\WorkoutController;
+use App\Http\Controllers\WorkoutExerciseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('equipments', EquipmentController::class);
     Route::apiResource('muscle-groups', MuscleGroupController::class);
     Route::apiResource('exercises', ExerciseController::class);
+    Route::apiResource('workout-exercises', WorkoutExerciseController::class);
 });

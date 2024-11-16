@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Exercise;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\WorkoutExercise;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,14 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
+        $user = User::factory()
             ->hasWorkouts(3)
             ->create([
-            'email' => 'test@test.com',
-            'password' => 'password'
-        ]);
+                'email' => 'test@test.com',
+                'password' => 'password'
+            ]);
 
-        Exercise::factory(10)
-            ->create();
+        $exercises = Exercise::factory(10)->create();
+
+        $user->workouts->each(function ($workout) use ($exercises) {
+            $selectedExercises = $exercises->random(rand(3, 5));
+
+            foreach ($selectedExercises as $index => $exercise) {
+                WorkoutExercise::create([
+                    'workout_id' => $workout->id,
+                    'exercise_id' => $exercise->id,
+                    'order' => $index + 1,
+                ]);
+            }
+        });
     }
 }

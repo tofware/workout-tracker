@@ -5,9 +5,13 @@ namespace App\Models;
 use Database\Factories\ExerciseFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Carbon;
 
 /**
  *
@@ -18,6 +22,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder<static>|Exercise newModelQuery()
  * @method static Builder<static>|Exercise newQuery()
  * @method static Builder<static>|Exercise query()
+ * @property int $id
+ * @property string $name
+ * @property array|null $instructions
+ * @property string|null $difficulty
+ * @property int $muscle_group_id
+ * @property int $equipment_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, WorkoutExercise> $workoutExercises
+ * @property-read int|null $workout_exercises_count
+ * @property-read Collection<int, \App\Models\Workout> $workouts
+ * @property-read int|null $workouts_count
+ * @method static Builder<static>|Exercise whereCreatedAt($value)
+ * @method static Builder<static>|Exercise whereDifficulty($value)
+ * @method static Builder<static>|Exercise whereEquipmentId($value)
+ * @method static Builder<static>|Exercise whereId($value)
+ * @method static Builder<static>|Exercise whereInstructions($value)
+ * @method static Builder<static>|Exercise whereMuscleGroupId($value)
+ * @method static Builder<static>|Exercise whereName($value)
+ * @method static Builder<static>|Exercise whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class Exercise extends Model
@@ -45,5 +69,15 @@ class Exercise extends Model
     public function muscleGroup(): BelongsTo
     {
         return $this->belongsTo(MuscleGroup::class);
+    }
+
+    public function workoutExercises(): HasMany
+    {
+        return $this->hasMany(WorkoutExercise::class);
+    }
+
+    public function workouts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Workout::class, WorkoutExercise::class);
     }
 }

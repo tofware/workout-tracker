@@ -5,13 +5,16 @@ namespace App\Models;
 use Database\Factories\WorkoutFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -31,6 +34,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Workout whereName($value)
  * @method static Builder<static>|Workout whereUpdatedAt($value)
  * @method static Builder<static>|Workout whereUserId($value)
+ * @property-read Collection<int, Exercise> $exercises
+ * @property-read int|null $exercises_count
+ * @property-read Collection<int, WorkoutExercise> $workoutExercises
+ * @property-read int|null $workout_exercises_count
  * @mixin Eloquent
  */
 class Workout extends Model
@@ -52,5 +59,15 @@ class Workout extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function workoutExercises(): HasMany
+    {
+        return $this->hasMany(WorkoutExercise::class);
+    }
+
+    public function exercises(): HasManyThrough
+    {
+        return $this->hasManyThrough(Exercise::class, WorkoutExercise::class);
     }
 }

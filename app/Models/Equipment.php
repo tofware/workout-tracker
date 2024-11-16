@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @method static EquipmentFactory factory($count = null, $state = [])
  * @method static Builder<static>|Equipment newModelQuery()
