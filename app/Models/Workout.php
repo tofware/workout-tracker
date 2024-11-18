@@ -70,4 +70,9 @@ class Workout extends Model
     {
         return $this->hasManyThrough(Exercise::class, WorkoutExercise::class);
     }
+
+    public function workoutSessions(): HasMany
+    {
+        return $this->hasMany(WorkoutSession::class);
+    }
 }

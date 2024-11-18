@@ -20,7 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -97,6 +97,11 @@ class User extends Authenticatable
             'password' => 'hashed',
             'experience_level' => ExperienceLevel::class
         ];
+    }
+
+    public function workoutSessions(): HasMany
+    {
+        return $this->hasMany(WorkoutSession::class);
     }
 
     public function workouts(): HasMany
