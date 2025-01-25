@@ -33,16 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('workouts', WorkoutController::class);
-    Route::apiResource('equipments', EquipmentController::class);
-    Route::apiResource('muscle-groups', MuscleGroupController::class);
-    Route::apiResource('exercises', ExerciseController::class);
-    Route::apiResource('workout-exercises', WorkoutExerciseController::class);
-    Route::apiResource('workout-sessions', WorkoutSessionController::class);
-    Route::apiResource('exercise-sets', ExerciseSetController::class);
-    Route::apiResource('progress-metrics', ProgressMetricController::class);
-    Route::apiResource('goals', GoalController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('workouts', WorkoutController::class);
+    Route::resource('equipments', EquipmentController::class);
+    Route::resource('muscle-groups', MuscleGroupController::class);
+    Route::resource('exercises', ExerciseController::class);
+    Route::resource('workout-exercises', WorkoutExerciseController::class);
+    Route::resource('workout-sessions', WorkoutSessionController::class);
+    Route::resource('exercise-sets', ExerciseSetController::class);
+    Route::resource('progress-metrics', ProgressMetricController::class);
+    Route::resource('goals', GoalController::class);
 });
 
 require __DIR__.'/auth.php';

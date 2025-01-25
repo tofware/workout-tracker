@@ -8,20 +8,21 @@ use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Requests\UpdateWorkoutRequest;
 use Auth;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Inertia\Inertia;
 
 class WorkoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
-     */
-    public function index(): AnonymousResourceCollection
+    public function index()
     {
-        return WorkoutResource::collection(Workout::all());
+        return Inertia::render('Workout/Index', [
+            'workouts' => Workout::with('category')->get()
+        ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Workout/Create');
+    }
     /**
      * Store a newly created resource in storage.
      *
