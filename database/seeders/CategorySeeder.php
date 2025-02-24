@@ -12,6 +12,33 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(5)->create();
+        $categories = [
+            'Strength Training',
+            'Hypertrophy (Muscle Growth)',
+            'Endurance Training',
+            'Powerlifting',
+            'Bodyweight Training',
+            'Cardio',
+            'HIIT (High-Intensity Interval Training)',
+            'Circuit Training',
+            'Mobility & Flexibility',
+            'Warm-up',
+            'Cooldown',
+            'Functional Fitness',
+            'Athletic Performance',
+            'Core Training',
+            'Full Body',
+            'Upper Body',
+            'Lower Body',
+            'Push Day',
+            'Pull Day',
+            'Leg Day'
+        ];
+
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+            ]);
+        }
     }
 }

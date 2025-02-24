@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\WorkoutResource;
+use Inertia\Inertia;
 use App\Models\Workout;
+use App\Models\Category;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\WorkoutResource;
 use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Requests\UpdateWorkoutRequest;
-use Auth;
-use Illuminate\Http\JsonResponse;
-use Inertia\Inertia;
 
 class WorkoutController extends Controller
 {
@@ -21,63 +22,62 @@ class WorkoutController extends Controller
 
     public function create()
     {
-        return Inertia::render('Workout/Create');
+        return Inertia::render('Workout/Create', [
+            'categories' => Category::all()
+        ]);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreWorkoutRequest $request
-     * @return WorkoutResource
-     */
-    public function store(StoreWorkoutRequest $request): WorkoutResource
+
+    public function store(StoreWorkoutRequest $request)
     {
         $validated = $request->validated();
 
         $workout = Workout::create([
-            ...$validated,
+            'name' => $validated['name'],
+            'category_id' => $validated['category'],
             'user_id' => Auth::id(),
         ]);
 
-        return new WorkoutResource($workout);
+        return to_route('workouts.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Workout $workout
-     * @return WorkoutResource
-     */
-    public function show(Workout $workout): WorkoutResource
+    public function show(Workout $workout)
     {
-        return new WorkoutResource($workout);
+        return Inertia::render('Workout/Show', [
+            'workout' => $workout,
+            'workoutExercises' => $workout->workoutExercises,
+            'exercises' => $workout->exercises
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateWorkoutRequest $request
-     * @param Workout $workout
-     * @return WorkoutResource
-     */
-    public function update(UpdateWorkoutRequest $request, Workout $workout): WorkoutResource
+    public function edit(Workout $workout)
+    {
+        return Inertia::render('Workout/Edit', [
+            'workout' => $workout
+        ]);
+    }
+
+    public function update(UpdateWorkoutRequest $request, Workout $workout)
     {
         $validated = $request->validated();
 
         $workout->update($validated);
 
-        return new WorkoutResource($workout);
+        return to_route('workouts.edit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Workout $workout
-     * @return JsonResponse
-     */
-    public function destroy(Workout $workout): JsonResponse
+    public function destroy(Workout $workout)
     {
         $workout->delete();
 
-        return response()->json('Workout deleted!');
+        return to_route('workouts.index');
+    }
+
+    public function start(Workout $workout)
+    {
+        return Inertia::render('Workout/Start', [
+            'workout' => $workout,
+            'workoutExercises' => $workout->workoutExercises,
+            'exercises' => $workout->exercises
+        ]);
     }
 }

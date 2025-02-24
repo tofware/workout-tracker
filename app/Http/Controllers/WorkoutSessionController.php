@@ -2,49 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\WorkoutSessionResource;
+use Inertia\Inertia;
+use App\Models\Workout;
 use App\Models\WorkoutSession;
+use Illuminate\Http\JsonResponse;
+use App\Http\Resources\WorkoutSessionResource;
 use App\Http\Requests\StoreWorkoutSessionRequest;
 use App\Http\Requests\UpdateWorkoutSessionRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 class WorkoutSessionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
-     */
-    public function index(): AnonymousResourceCollection
+    public function create()
     {
-        return WorkoutSessionResource::collection(WorkoutSession::all());
+        return Inertia::render('WorkoutSession/Create', [
+            'workouts' => Workout::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreWorkoutSessionRequest $request
-     * @return WorkoutSessionResource
-     */
-    public function store(StoreWorkoutSessionRequest $request): WorkoutSessionResource
+    public function store(StoreWorkoutSessionRequest $request)
     {
         $validated = $request->validated();
 
-        $workoutSession = WorkoutSession::create($validated);
+        $workout = Workout::with('exercises')->find($validated['workout']);
 
-        return new WorkoutSessionResource($workoutSession);
+        $workoutSession = WorkoutSession::create([
+            'workout_id' => $validated['workout'],
+            'user_id' => Auth::user()->id
+        ]);
+
+        return Inertia::render('WorkoutSession/Overview', [
+            'workout' => $workout,
+            'exercises' => $workout->exercises,
+            'workoutSession' => $workoutSession
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param WorkoutSession $workoutSession
-     * @return WorkoutSessionResource
-     */
-    public function show(WorkoutSession $workoutSession): WorkoutSessionResource
+    public function start(WorkoutSession $workoutSession)
     {
-        return new WorkoutSessionResource($workoutSession);
+        $workout = $workoutSession->workout;
+
+        return Inertia::render('WorkoutSession/Start', [
+            'workout' => $workout,
+            'exercises' => $workout->exercises,
+            'workoutSession' => $workoutSession
+        ]);
+    }
+
+    public function finish(WorkoutSession $workoutSession)
+    {
+        $workout = $workoutSession->workout;
+
+        return Inertia::render('WorkoutSession/Finish', [
+            'workout' => $workout,
+            'exercises' => $workout->exercises,
+            'workoutSession' => $workoutSession
+        ]);
     }
 
     /**

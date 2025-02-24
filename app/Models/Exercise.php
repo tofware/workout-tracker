@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Database\Factories\ExerciseFactory;
 use Eloquent;
+use Illuminate\Support\Carbon;
+use Database\Factories\ExerciseFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property-read Equipment|null $equipment
  * @property-read MuscleGroup|null $muscleGroup
@@ -82,9 +83,11 @@ class Exercise extends Model
         return $this->hasMany(WorkoutExercise::class);
     }
 
-    public function workouts(): HasManyThrough
+    public function workouts(): BelongsToMany
     {
-        return $this->hasManyThrough(Workout::class, WorkoutExercise::class);
+        return $this->belongsToMany(Workout::class, 'workout_exercises')
+                ->withPivot('order')
+                ->orderBy('order');
     }
 
     public function exerciseSets(): HasMany

@@ -26,7 +26,6 @@ class ExerciseSetFactory extends Factory
             'repetitions' => fake()->numberBetween(1, 50),
             'weight' => fake()->numberBetween(1, 500),
             'notes' => fake()->text(30),
-            'rest_time' => fake()->numberBetween(1, 25),
         ];
     }
 }

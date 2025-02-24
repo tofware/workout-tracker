@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -21,7 +21,9 @@ import { Head } from '@inertiajs/vue3';
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
-                        You're logged in!
+                        <Link
+                            class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+                            :href="`/workout-sessions/create/`">Start Workout Session</Link>
                     </div>
                 </div>
             </div>

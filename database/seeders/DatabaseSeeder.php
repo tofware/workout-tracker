@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Enums\GoalStatus;
-use App\Models\Exercise;
-use App\Models\ExerciseHistory;
-use App\Models\ExerciseSet;
 use App\Models\Goal;
-use App\Models\ProgressMetric;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\WorkoutExercise;
+use App\Models\Workout;
+use App\Models\Exercise;
+use App\Enums\GoalStatus;
+use App\Models\ExerciseSet;
+use App\Models\ProgressMetric;
 use App\Models\WorkoutSession;
+use App\Models\ExerciseHistory;
+use App\Models\WorkoutExercise;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,15 +23,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()
-            ->hasWorkouts(3)
             ->create([
                 'email' => 'test@test.com',
                 'password' => 'password'
             ]);
 
-        $exercises = Exercise::factory(10)->create();
+        $this->call([
+            CategorySeeder::class,
+            EquipmentSeeder::class,
+            MuscleGroupSeeder::class,
+            ExerciseSeeder::class,
+            WorkoutSeeder::class
+        ]);
 
-        $user->workouts->each(function ($workout) use ($exercises, $user) {
+        $workouts = Workout::all();
+        $exercises = Exercise::all();
+
+        $workouts->each(function ($workout) use ($exercises, $user) {
             $selectedExercises = $exercises->random(rand(3, 5));
 
             $workoutSession = WorkoutSession::create([
@@ -56,7 +65,6 @@ class DatabaseSeeder extends Seeder
                     'repetitions' => fake()->numberBetween(1, 50),
                     'weight' => fake()->numberBetween(1, 500),
                     'notes' => fake()->text(30),
-                    'rest_time' => fake()->numberBetween(1, 25),
                 ]);
 
                 ExerciseHistory::create([

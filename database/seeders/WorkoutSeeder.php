@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Workout;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class WorkoutSeeder extends Seeder
@@ -12,6 +14,14 @@ class WorkoutSeeder extends Seeder
      */
     public function run(): void
     {
-        Workout::factory(5)->create();
+        $categories = Category::all();
+
+        for($i = 0; $i < 5; $i++){
+            Workout::create([
+                'name' => fake()->name,
+                'category_id' => $categories->random()->id,
+                'user_id' => User::first()->id,
+            ]);
+        }
     }
 }

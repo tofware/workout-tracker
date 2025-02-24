@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('workout_session_id')->constrained()->onDelete('cascade');
             $table->foreignId('exercise_id')->constrained()->onDelete('cascade');
-            $table->string('set_number')->nullable();
-            $table->integer('repetitions')->nullable();
-            $table->integer('weight')->nullable();
+            $table->string('set_number');
+            $table->integer('repetitions');
+            $table->integer('weight');
             $table->string('notes')->nullable();
-            $table->integer('rest_time')->nullable();
             $table->timestamps();
         });
     }

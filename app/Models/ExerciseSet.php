@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @method static Builder<static>|ExerciseSet newModelQuery()
  * @method static Builder<static>|ExerciseSet newQuery()
@@ -53,7 +53,6 @@ class ExerciseSet extends Model
         'repetitions',
         'weight',
         'notes',
-        'rest_time'
     ];
 
     public function exercise(): BelongsTo

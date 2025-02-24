@@ -25,11 +25,10 @@ class StoreExerciseSetRequest extends FormRequest
         return [
             'workout_session_id' => ['required', 'exists:App\Models\WorkoutSession,id'],
             'exercise_id' => ['required', 'exists:App\Models\Exercise,id'],
-            'set_number' => ['required', 'integer', 'min:1', 'max:50'],
-            'repetitions' => ['required', 'integer', 'min:1', 'max:50'],
-            'weight' => ['nullable', 'integer', 'min:1', 'max:1000'],
-            'notes' => ['nullable', 'string', 'min:1', 'max:50'],
-            'rest_time' => ['nullable', 'integer', 'min:1', 'max:50'],
+            'sets' => ['required', 'array', 'min:1'],
+            'sets.*.reps' => ['required', 'integer', 'min:1', 'max:500'],
+            'sets.*.weight' => ['required', 'integer', 'min:1', 'max:1000'],
+            'sets.*.notes' => ['nullable', 'string', 'min:1', 'max:50'],
         ];
     }
 }

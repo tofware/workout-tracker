@@ -7,44 +7,29 @@ use App\Http\Requests\UpdateExerciseSetRequest;
 use App\Http\Resources\ExerciseSetResource;
 use App\Models\ExerciseSet;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ExerciseSetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
-     */
-    public function index(): AnonymousResourceCollection
-    {
-        return ExerciseSetResource::collection(ExerciseSet::all());
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreExerciseSetRequest $request
-     * @return ExerciseSetResource
-     */
-    public function store(StoreExerciseSetRequest $request): ExerciseSetResource
+    public function store(StoreExerciseSetRequest $request)
     {
         $validated = $request->validated();
+        $setNumber = 1;
 
-        $exerciseSet = ExerciseSet::create($validated);
+        foreach ($validated['sets'] as $set) {
+            ExerciseSet::create([
+                'workout_session_id' => $validated['workout_session_id'],
+                'exercise_id' => $validated['exercise_id'],
+                'set_number' => $setNumber,
+                'repetitions' => $set['reps'],
+                'weight' => $set['weight'],
+                'notes' => $set['notes'] ?? null
+            ]);
 
-        return new ExerciseSetResource($exerciseSet);
-    }
+            $setNumber++;
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param ExerciseSet $exerciseSet
-     * @return ExerciseSetResource
-     */
-    public function show(ExerciseSet $exerciseSet): ExerciseSetResource
-    {
-        return new ExerciseSetResource($exerciseSet);
+        return back()->with('success', 'Exercise data saved.');
     }
 
     /**

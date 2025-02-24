@@ -23,8 +23,7 @@ class StoreWorkoutSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workout_id' => ['required', 'exists:App\Models\Workout,id'],
-            'user_id' => ['required', 'exists:App\Models\User,id'],
+            'workout' => ['required', 'exists:App\Models\Workout,id'],
             'notes' => ['nullable', 'string'],
             'duration' => ['nullable', 'integer'],
             'calories_burned' => ['nullable', 'integer'],
