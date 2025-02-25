@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Exercise;
+use App\Models\Instruction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Category>
+ * @extends Factory<Instruction>
  */
-class CategoryFactory extends Factory
+class InstructionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +19,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name
+            'exercise_id' => Exercise::factory(),
+            'instruction' => fake()->text(25),
         ];
     }
 }

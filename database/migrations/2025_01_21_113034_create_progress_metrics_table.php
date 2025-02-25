@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('progress_metrics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('weight');
             $table->integer('body_fat_percentage')->nullable();
             $table->integer('muscle_mass')->nullable();
             $table->string('notes');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

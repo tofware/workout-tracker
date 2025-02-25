@@ -49,6 +49,17 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read int|null $exercise_history_count
  * @property-read Collection<int, \App\Models\Goal> $goals
  * @property-read int|null $goals_count
+ * @property string|null $force
+ * @property string|null $mechanic
+ * @property int $exercise_category_id
+ * @property-read \App\Models\ExerciseCategory|null $category
+ * @property-read \App\Models\TFactory|null $use_factory
+ * @property-read int|null $instructions_count
+ * @property-read Collection<int, \App\Models\MuscleGroup> $muscleGroups
+ * @property-read int|null $muscle_groups_count
+ * @method static Builder<static>|Exercise whereExerciseCategoryId($value)
+ * @method static Builder<static>|Exercise whereForce($value)
+ * @method static Builder<static>|Exercise whereMechanic($value)
  * @mixin Eloquent
  */
 class Exercise extends Model
@@ -59,28 +70,24 @@ class Exercise extends Model
     protected $fillable = [
         'name',
         'difficulty',
-        'instructions',
-        'muscle_group_id',
+        'force',
+        'mechanic',
         'equipment_id'
     ];
 
-    protected $casts = [
-        'instructions' => 'array',
-    ];
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(ExerciseCategory::class);
+    }
 
     public function equipment(): BelongsTo
     {
         return $this->belongsTo(Equipment::class);
     }
 
-    public function muscleGroup(): BelongsTo
+    public function muscleGroups(): BelongsToMany
     {
-        return $this->belongsTo(MuscleGroup::class);
-    }
-
-    public function workoutExercises(): HasMany
-    {
-        return $this->hasMany(WorkoutExercise::class);
+        return $this->belongsToMany(MuscleGroup::class, 'exercise_muscle_groups');
     }
 
     public function workouts(): BelongsToMany
@@ -103,5 +110,10 @@ class Exercise extends Model
     public function goals(): HasMany
     {
         return $this->hasMany(Goal::class);
+    }
+
+    public function instructions(): HasMany
+    {
+        return $this->hasMany(Instruction::class);
     }
 }

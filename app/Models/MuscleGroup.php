@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|MuscleGroup whereName($value)
  * @property-read Collection<int, Exercise> $exercises
  * @property-read int|null $exercises_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class MuscleGroup extends Model

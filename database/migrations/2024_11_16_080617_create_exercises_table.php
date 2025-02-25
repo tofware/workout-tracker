@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->json('instructions')->nullable();
+            $table->string('force', 30)->nullable();
+            $table->string('mechanic', 50)->nullable();
             $table->string('difficulty', 50)->nullable();
-            $table->foreignId('muscle_group_id')->constrained()->onDelete('cascade');
             $table->foreignId('equipment_id')->constrained('equipments')->onDelete('cascade');
+            $table->foreignId('exercise_category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

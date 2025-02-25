@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workouts', function (Blueprint $table) {
+        Schema::create('exercise_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('workout_category_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+            $table->string('name', '50');
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workouts');
+        Schema::dropIfExists('exercise_categories');
     }
 };

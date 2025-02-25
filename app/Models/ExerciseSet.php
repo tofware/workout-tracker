@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @method static Builder<static>|ExerciseSet newModelQuery()
  * @method static Builder<static>|ExerciseSet newQuery()
@@ -39,6 +39,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|ExerciseSet whereUpdatedAt($value)
  * @method static Builder<static>|ExerciseSet whereWeight($value)
  * @method static Builder<static>|ExerciseSet whereWorkoutSessionId($value)
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class ExerciseSet extends Model

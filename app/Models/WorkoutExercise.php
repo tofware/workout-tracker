@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $workout_id
@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereWorkoutId($value)
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin \Eloquent
  */
 class WorkoutExercise extends Model

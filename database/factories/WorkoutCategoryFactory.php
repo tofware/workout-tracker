@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Workout;
 use App\Models\WorkoutCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Workout>
+ * @extends Factory<WorkoutCategory>
  */
-class WorkoutFactory extends Factory
+class WorkoutCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,9 +18,7 @@ class WorkoutFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
-            'category_id' => WorkoutCategory::factory(),
-            'user_id' => User::factory(),
+            'name' => fake()->name
         ];
     }
 }

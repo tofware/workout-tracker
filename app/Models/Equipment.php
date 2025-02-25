@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @method static EquipmentFactory factory($count = null, $state = [])
  * @method static Builder<static>|Equipment newModelQuery()
@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|Equipment whereName($value)
  * @property-read Collection<int, Exercise> $exercises
  * @property-read int|null $exercises_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class Equipment extends Model

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Goal;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Workout;
 use App\Models\Exercise;
 use App\Enums\GoalStatus;
@@ -25,14 +24,12 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()
             ->create([
                 'email' => 'test@test.com',
-                'password' => 'password'
+                'password' => 'test'
             ]);
 
         $this->call([
-            CategorySeeder::class,
-            EquipmentSeeder::class,
-            MuscleGroupSeeder::class,
-            ExerciseSeeder::class,
+            JsonSeeder::class,
+            WorkoutCategorySeeder::class,
             WorkoutSeeder::class
         ]);
 

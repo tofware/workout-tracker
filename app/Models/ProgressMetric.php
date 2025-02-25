@@ -34,6 +34,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|ProgressMetric whereUpdatedAt($value)
  * @method static Builder<static>|ProgressMetric whereUserId($value)
  * @method static Builder<static>|ProgressMetric whereWeight($value)
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class ProgressMetric extends Model

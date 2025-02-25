@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  *
@@ -23,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Category $category
+ * @property-read WorkoutCategory $category
  * @property-read User $user
  * @method static WorkoutFactory factory($count = null, $state = [])
  * @method static Builder<static>|Workout newModelQuery()
@@ -41,6 +40,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read int|null $workout_exercises_count
  * @property-read Collection<int, \App\Models\WorkoutSession> $workoutSessions
  * @property-read int|null $workout_sessions_count
+ * @property int $workout_category_id
+ * @property-read \App\Models\TFactory|null $use_factory
+ * @method static Builder<static>|Workout whereWorkoutCategoryId($value)
  * @mixin Eloquent
  */
 class Workout extends Model
@@ -56,17 +58,12 @@ class Workout extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(WorkoutCategory::class);
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function workoutExercises(): HasMany
-    {
-        return $this->hasMany(WorkoutExercise::class);
     }
 
     public function exercises(): BelongsToMany

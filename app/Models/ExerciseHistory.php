@@ -39,6 +39,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|ExerciseHistory whereOneRepMax($value)
  * @method static Builder<static>|ExerciseHistory whereUpdatedAt($value)
  * @method static Builder<static>|ExerciseHistory whereUserId($value)
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class ExerciseHistory extends Model

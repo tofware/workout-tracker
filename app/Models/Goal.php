@@ -18,6 +18,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal query()
+ * @property int $id
+ * @property int $user_id
+ * @property int $exercise_id
+ * @property string $goal_type
+ * @property int $target_value
+ * @property string|null $deadline
+ * @property int $status
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\TFactory|null $use_factory
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereDeadline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereExerciseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereGoalType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereTargetValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereUserId($value)
  * @mixin \Eloquent
  */
 class Goal extends Model

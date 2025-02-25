@@ -62,6 +62,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read int|null $progress_metrics_count
  * @property-read Collection<int, \App\Models\Goal> $goals
  * @property-read int|null $goals_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class User extends Authenticatable

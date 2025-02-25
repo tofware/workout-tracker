@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Workout;
-use App\Models\Category;
-use Illuminate\Http\JsonResponse;
+use App\Models\WorkoutCategory;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\WorkoutResource;
 use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Requests\UpdateWorkoutRequest;
 
@@ -23,7 +21,7 @@ class WorkoutController extends Controller
     public function create()
     {
         return Inertia::render('Workout/Create', [
-            'categories' => Category::all()
+            'categories' => WorkoutCategory::all()
         ]);
     }
 
@@ -44,17 +42,16 @@ class WorkoutController extends Controller
     {
         return Inertia::render('Workout/Show', [
             'workout' => $workout,
-            'workoutExercises' => $workout->workoutExercises,
             'exercises' => $workout->exercises
         ]);
     }
 
-    public function edit(Workout $workout)
-    {
-        return Inertia::render('Workout/Edit', [
-            'workout' => $workout
-        ]);
-    }
+    // public function edit(Workout $workout)
+    // {
+    //     return Inertia::render('Workout/Edit', [
+    //         'workout' => $workout
+    //     ]);
+    // }
 
     public function update(UpdateWorkoutRequest $request, Workout $workout)
     {
@@ -70,14 +67,5 @@ class WorkoutController extends Controller
         $workout->delete();
 
         return to_route('workouts.index');
-    }
-
-    public function start(Workout $workout)
-    {
-        return Inertia::render('Workout/Start', [
-            'workout' => $workout,
-            'workoutExercises' => $workout->workoutExercises,
-            'exercises' => $workout->exercises
-        ]);
     }
 }

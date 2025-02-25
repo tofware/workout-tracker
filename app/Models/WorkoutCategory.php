@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Database\Factories\CategoryFactory;
+use Database\Factories\WorkoutCategoryFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,17 +17,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property-read Collection<int, Workout> $workouts
  * @property-read int|null $workouts_count
- * @method static CategoryFactory factory($count = null, $state = [])
- * @method static Builder<static>|Category newModelQuery()
- * @method static Builder<static>|Category newQuery()
- * @method static Builder<static>|Category query()
- * @method static Builder<static>|Category whereId($value)
- * @method static Builder<static>|Category whereName($value)
+ * @method static WorkoutCategoryFactory factory($count = null, $state = [])
+ * @method static Builder<static>|WorkoutCategory newModelQuery()
+ * @method static Builder<static>|WorkoutCategory newQuery()
+ * @method static Builder<static>|WorkoutCategory query()
+ * @method static Builder<static>|WorkoutCategory whereId($value)
+ * @method static Builder<static>|WorkoutCategory whereName($value)
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
-class Category extends Model
+class WorkoutCategory extends Model
 {
-    /** @use HasFactory<CategoryFactory> */
+    /** @use HasFactory<WorkoutCategoryFactory> */
     use HasFactory;
 
     protected $fillable = [

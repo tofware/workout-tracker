@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('exercise_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('exercise_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->integer('best_weight');
             $table->integer('best_repetitions');
             $table->integer('one_rep_max');
             $table->string('notes')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('exercise_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

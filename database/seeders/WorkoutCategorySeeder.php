@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\WorkoutCategory;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class WorkoutCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -36,7 +36,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::create([
+            WorkoutCategory::create([
                 'name' => $category,
             ]);
         }

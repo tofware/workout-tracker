@@ -40,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|WorkoutSession whereWorkoutId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ExerciseSet> $exerciseSets
  * @property-read int|null $exercise_sets_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @mixin Eloquent
  */
 class WorkoutSession extends Model
