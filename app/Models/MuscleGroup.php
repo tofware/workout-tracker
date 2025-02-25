@@ -37,8 +37,9 @@ class MuscleGroup extends Model
         'name'
     ];
 
-    public function exercises(): HasMany
+    public function exercises()
     {
-        return $this->hasMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class, 'exercise_muscle_groups')
+                    ->withPivot('primary');
     }
 }

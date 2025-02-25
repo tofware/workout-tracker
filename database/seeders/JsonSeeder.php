@@ -59,7 +59,7 @@ class JsonSeeder extends Seeder
 
             foreach ($exerciseData['primaryMuscles'] as $muscleName) {
                 $muscleGroup = MuscleGroup::firstOrCreate(['name' => ucfirst($muscleName)]);
-                ExerciseMuscleGroup::firstOrCreate([
+                ExerciseMuscleGroup::create([
                     'exercise_id' => $exercise->id,
                     'muscle_group_id' => $muscleGroup->id,
                     'primary' => true
@@ -68,7 +68,7 @@ class JsonSeeder extends Seeder
 
             foreach ($exerciseData['secondaryMuscles'] as $muscleName) {
                 $muscleGroup = MuscleGroup::firstOrCreate(['name' => ucfirst($muscleName)]);
-                ExerciseMuscleGroup::firstOrCreate([
+                ExerciseMuscleGroup::create([
                     'exercise_id' => $exercise->id,
                     'muscle_group_id' => $muscleGroup->id,
                     'primary' => false

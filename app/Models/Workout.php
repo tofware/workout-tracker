@@ -52,13 +52,18 @@ class Workout extends Model
 
     protected $fillable = [
         'name',
-        'category_id',
+        'workout_category_id',
         'user_id'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:D d M Y H:i:s',
+        'updated_at' => 'datetime:D d M Y H:i:s'
+   	];
+
     public function category(): BelongsTo
     {
-        return $this->belongsTo(WorkoutCategory::class);
+        return $this->belongsTo(WorkoutCategory::class, 'workout_category_id');
     }
 
     public function user(): BelongsTo

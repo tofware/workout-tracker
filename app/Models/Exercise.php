@@ -77,7 +77,7 @@ class Exercise extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(ExerciseCategory::class);
+        return $this->belongsTo(ExerciseCategory::class, 'exercise_category_id');
     }
 
     public function equipment(): BelongsTo
@@ -85,9 +85,20 @@ class Exercise extends Model
         return $this->belongsTo(Equipment::class);
     }
 
-    public function muscleGroups(): BelongsToMany
+    public function muscleGroups()
     {
-        return $this->belongsToMany(MuscleGroup::class, 'exercise_muscle_groups');
+        return $this->belongsToMany(MuscleGroup::class, 'exercise_muscle_groups')
+                    ->withPivot('primary');
+    }
+
+    public function primaryMuscleGroups()
+    {
+        return $this->muscleGroups()->wherePivot('primary', 1);
+    }
+
+    public function secondaryMuscleGroups()
+    {
+        return $this->muscleGroups()->wherePivot('primary', 0);
     }
 
     public function workouts(): BelongsToMany

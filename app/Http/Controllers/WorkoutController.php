@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Workout;
+use App\Models\Exercise;
 use App\Models\WorkoutCategory;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreWorkoutRequest;
@@ -29,9 +30,9 @@ class WorkoutController extends Controller
     {
         $validated = $request->validated();
 
-        $workout = Workout::create([
+        Workout::create([
             'name' => $validated['name'],
-            'category_id' => $validated['category'],
+            'workout_category_id' => $validated['category'],
             'user_id' => Auth::id(),
         ]);
 
@@ -45,13 +46,6 @@ class WorkoutController extends Controller
             'exercises' => $workout->exercises
         ]);
     }
-
-    // public function edit(Workout $workout)
-    // {
-    //     return Inertia::render('Workout/Edit', [
-    //         'workout' => $workout
-    //     ]);
-    // }
 
     public function update(UpdateWorkoutRequest $request, Workout $workout)
     {
@@ -67,5 +61,30 @@ class WorkoutController extends Controller
         $workout->delete();
 
         return to_route('workouts.index');
+    }
+
+    public function getExercises(Workout $workout)
+    {
+        return Inertia::render('Workout/Exercises', [
+            'workout' => $workout,
+            'workoutExercises' => $workout->exercises()->with('equipment', 'category', 'muscleGroups')->get(),
+            'exercises' => Exercise::all(),
+        ]);
+    }
+
+    public function addExercise(Workout $workout, Exercise $exercise)
+    {
+        $nextOrder = $workout->exercises()->max('order') + 1;
+
+        $workout->exercises()->attach($exercise->id, ['order' => $nextOrder]);
+
+        return to_route('workouts.get-exercises', $workout);
+    }
+
+    public function removeExercise(Workout $workout, Exercise $exercise)
+    {
+        $workout->exercises()->detach($exercise->id);
+
+        return to_route('workouts.get-exercises', $workout);
     }
 }

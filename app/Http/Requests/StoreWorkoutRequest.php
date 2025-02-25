@@ -24,7 +24,7 @@ class StoreWorkoutRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:100'],
-            'category' => ['required', 'exists:App\Models\Category,id']
+            'category' => ['required', 'exists:App\Models\WorkoutCategory,id']
         ];
     }
 }
