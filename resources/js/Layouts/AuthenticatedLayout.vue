@@ -49,6 +49,11 @@ const showingNavigationDropdown = ref(false);
                                     :active="route().current('progress-metrics.index')">
                                     Progress Metrics
                                 </NavLink>
+                                <NavLink
+                                    :href="route('goals.index')"
+                                    :active="route().current('goals.index')">
+                                    Goals
+                                </NavLink>
                             </div>
                         </div>
 

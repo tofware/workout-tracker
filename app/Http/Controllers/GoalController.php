@@ -2,77 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\GoalResource;
 use App\Models\Goal;
+use Inertia\Inertia;
+use App\Models\Exercise;
+use App\Http\Resources\GoalResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreGoalRequest;
-use App\Http\Requests\UpdateGoalRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class GoalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
-     */
-    public function index(): AnonymousResourceCollection
+
+    public function index()
     {
-        return GoalResource::collection(Goal::all());
+        return Inertia::render('Goals/Index', [
+            'goals' => Auth::user()->goals,
+            'exercises' => Exercise::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreGoalRequest $request
-     * @return GoalResource
-     */
-    public function store(StoreGoalRequest $request): GoalResource
+    public function store(StoreGoalRequest $request)
     {
         $validated = $request->validated();
 
-        $goal = Goal::create($validated);
+        Goal::create([
+            'user_id' => Auth::id(),
+            'exercise_id' => Exercise::find($validated['exercise'])->first()->id,
+            'goal_type' => $validated['goal_type'],
+            'target_value' => $validated['target_value'],
+            'deadline' => $validated['deadline'],
+            'status' => 0,
+            'notes' => $validated['notes']
+        ]);
 
-        return new GoalResource($goal);
+        return to_route('goals.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Goal $goal
-     * @return GoalResource
-     */
-    public function show(Goal $goal): GoalResource
-    {
-        return new GoalResource($goal);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateGoalRequest $request
-     * @param Goal $goal
-     * @return GoalResource
-     */
-    public function update(UpdateGoalRequest $request, Goal $goal): GoalResource
-    {
-        $validated = $request->validated();
-
-        $goal->update($validated);
-
-        return new GoalResource($goal);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Goal $goal
-     * @return JsonResponse
-     */
-    public function destroy(Goal $goal): JsonResponse
+    public function destroy(Goal $goal)
     {
         $goal->delete();
 
-        return response()->json('Goal deleted!');
+        return to_route('goals.index');
     }
 }

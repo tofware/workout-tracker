@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseSetController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\ProgressMetricController;
 use App\Http\Controllers\WorkoutSessionController;
 
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('workouts', WorkoutController::class);
     Route::resource('progress-metrics', ProgressMetricController::class);
+    Route::resource('goals', GoalController::class);
 
     Route::get('workouts/{workout}/exercises', [WorkoutController::class, 'getExercises'])->name('workouts.get-exercises');
     Route::post('workouts/{workout}/exercises/{exercise}', [WorkoutController::class, 'addExercise'])->name('workouts.add-exercises');
