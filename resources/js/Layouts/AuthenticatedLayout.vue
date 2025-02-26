@@ -1,213 +1,92 @@
 <script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
-const showingNavigationDropdown = ref(false);
+defineProps({
+    title: String,
+});
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav
-                class="border-b border-gray-100 bg-white"
-            >
-                <!-- Primary Navigation Menu -->
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 justify-between">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
-                                </Link>
-                            </div>
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <aside
+            class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-screen w-64 p-4 shadow-xl shadow-blue-gray-900/5">
+            <div class="mb-2 p-4">
+                <Link :href="route('dashboard')">
+                <h5
+                    class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-gray-900">
+                    Workout Tracker
+                </h5>
+                </Link>
 
-                            <!-- Navigation Links -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </NavLink>
-                                <NavLink
-                                    :href="route('workouts.index')"
-                                    :active="route().current('workouts.index')">
-                                    Workouts
-                                </NavLink>
-                                <NavLink
-                                    :href="route('progress-metrics.index')"
-                                    :active="route().current('progress-metrics.index')">
-                                    Progress Metrics
-                                </NavLink>
-                                <NavLink
-                                    :href="route('goals.index')"
-                                    :active="route().current('goals.index')">
-                                    Goals
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
-                            <div class="relative ms-3">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink
-                                            :href="route('profile.edit')"
-                                        >
-                                            Profile
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
-                            >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
+            </div>
+            <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal">
+                <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M3 3.75A.75.75 0 013.75 3h16.5a.75.75 0 01.75.75v16.5a.75.75 0 01-.75.75H3.75a.75.75 0 01-.75-.75V3.75zM9 9.75A.75.75 0 019.75 9h4.5a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75V9.75z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </div>
-                </div>
+                    Dashboard
+                </NavLink>
 
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-                    class="sm:hidden"
-                >
-                    <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
+                <NavLink :href="route('workouts.index')" :active="route().current('workouts.index')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M6.75 2.25a.75.75 0 00-1.5 0v1.5h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v1.5a.75.75 0 001.5 0v-1.5h10.5v1.5a.75.75 0 001.5 0v-1.5h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-1.5a.75.75 0 00-1.5 0v1.5H6.75v-1.5zm10.5 3h-10.5v3h10.5v-3zm-10.5 4.5h10.5v3h-10.5v-3zm10.5 4.5h-10.5v3h10.5v-3z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </div>
+                    Workouts
+                </NavLink>
 
-                    <!-- Responsive Settings Options -->
-                    <div
-                        class="border-t border-gray-200 pb-1 pt-4"
-                    >
-                        <div class="px-4">
-                            <div
-                                class="text-base font-medium text-gray-800"
-                            >
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="text-sm font-medium text-gray-500">
-                                {{ $page.props.auth.user.email }}
-                            </div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
+                <NavLink :href="route('goals.index')" :active="route().current('goals.index')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12 2.25a.75.75 0 01.75.75v4.1l1.6-1.1a.75.75 0 11.85 1.25l-3 2.05a.75.75 0 01-.85 0l-3-2.05a.75.75 0 01.85-1.25l1.6 1.1V3a.75.75 0 01.75-.75zM6.75 12a.75.75 0 00-1.5 0v6.75H3a.75.75 0 000 1.5h6.75a.75.75 0 000-1.5H6.75V12zm9 0a.75.75 0 00-1.5 0v6.75H12a.75.75 0 000 1.5h6.75a.75.75 0 000-1.5H15.75V12z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </div>
-                </div>
+                    Goals
+                </NavLink>
+
+                <NavLink :href="route('progress-metrics.index')" :active="route().current('progress-metrics.index')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4.5 3a.75.75 0 00-.75.75V20.25c0 .414.336.75.75.75h15a.75.75 0 00.75-.75V3.75A.75.75 0 0019.5 3h-15zM9 7.5a.75.75 0 011.5 0v7.5a.75.75 0 01-1.5 0V7.5zm3 3a.75.75 0 011.5 0v4.5a.75.75 0 01-1.5 0v-4.5zm3-1.5a.75.75 0 011.5 0v6a.75.75 0 01-1.5 0v-6z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    Progress Metrics
+                </NavLink>
+
+                <NavLink :href="route('profile.edit')" :active="route().current('profile.edit')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12 2.25a5.25 5.25 0 100 10.5 5.25 5.25 0 000-10.5zM3 20.25a9 9 0 1118 0 .75.75 0 01-.75.75H3.75a.75.75 0 01-.75-.75z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    Profile
+                </NavLink>
             </nav>
+        </aside>
 
-            <!-- Page Heading -->
-            <header
-                class="bg-white shadow"
-                v-if="$slots.header"
-            >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
-        </div>
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <slot />
+        </main>
     </div>
 </template>

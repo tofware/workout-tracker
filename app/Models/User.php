@@ -20,7 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -116,11 +116,6 @@ class User extends Authenticatable
     public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);
-    }
-
-    public function exerciseHistory(): HasMany
-    {
-        return $this->hasMany(ExerciseHistory::class);
     }
 
     public function progressMetrics(): HasMany
