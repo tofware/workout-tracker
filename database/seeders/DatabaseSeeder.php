@@ -64,16 +64,6 @@ class DatabaseSeeder extends Seeder
                     'notes' => fake()->text(30),
                 ]);
 
-                ExerciseHistory::create([
-                    'user_id' => $user->id,
-                    'exercise_id' => $exercise->id,
-                    'date' => fake()->date,
-                    'best_weight' => fake()->numberBetween(1, 1000),
-                    'best_repetitions' => fake()->numberBetween(1, 50),
-                    'one_rep_max' => fake()->numberBetween(1, 1000),
-                    'notes' => fake()->text(50)
-                ]);
-
                 Goal::create([
                     'user_id' => $user->id,
                     'exercise_id' => $exercise->id,

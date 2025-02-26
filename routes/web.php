@@ -8,7 +8,6 @@ use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseSetController;
 use App\Http\Controllers\ProgressMetricController;
 use App\Http\Controllers\WorkoutSessionController;
-use App\Models\ProgressMetric;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Workout;
 use App\Models\WorkoutSession;
-use Illuminate\Http\JsonResponse;
-use App\Http\Resources\WorkoutSessionResource;
 use App\Http\Requests\StoreWorkoutSessionRequest;
-use App\Http\Requests\UpdateWorkoutSessionRequest;
 use Illuminate\Support\Facades\Auth;
 
 class WorkoutSessionController extends Controller
@@ -58,34 +55,5 @@ class WorkoutSessionController extends Controller
             'exercises' => $workout->exercises,
             'workoutSession' => $workoutSession
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateWorkoutSessionRequest $request
-     * @param WorkoutSession $workoutSession
-     * @return WorkoutSessionResource
-     */
-    public function update(UpdateWorkoutSessionRequest $request, WorkoutSession $workoutSession): WorkoutSessionResource
-    {
-        $validated = $request->validated();
-
-        $workoutSession->update($validated);
-
-        return new WorkoutSessionResource($workoutSession);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param WorkoutSession $workoutSession
-     * @return JsonResponse
-     */
-    public function destroy(WorkoutSession $workoutSession): JsonResponse
-    {
-        $workoutSession->delete();
-
-        return response()->json('Workout session deleted!');
     }
 }
