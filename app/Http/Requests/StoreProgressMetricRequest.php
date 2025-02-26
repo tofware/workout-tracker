@@ -23,7 +23,6 @@ class StoreProgressMetricRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:App\Models\User,id'],
             'weight' => ['required', 'integer', 'min:1', 'max:100'],
             'body_fat_percentage' => ['nullable', 'integer', 'min:1', 'max:100'],
             'muscle_mass' => ['nullable', 'integer', 'min:1', 'max:100'],

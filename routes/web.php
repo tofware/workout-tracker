@@ -6,7 +6,9 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseSetController;
+use App\Http\Controllers\ProgressMetricController;
 use App\Http\Controllers\WorkoutSessionController;
+use App\Models\ProgressMetric;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -27,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('workouts', WorkoutController::class);
+    Route::resource('progress-metrics', ProgressMetricController::class);
 
     Route::get('workouts/{workout}/exercises', [WorkoutController::class, 'getExercises'])->name('workouts.get-exercises');
     Route::post('workouts/{workout}/exercises/{exercise}', [WorkoutController::class, 'addExercise'])->name('workouts.add-exercises');

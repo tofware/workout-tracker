@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -49,6 +49,11 @@ class ProgressMetric extends Model
         'muscle_mass',
         'notes'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:D d M Y H:i:s',
+        'updated_at' => 'datetime:D d M Y H:i:s'
+   	];
 
     public function user(): BelongsTo
     {

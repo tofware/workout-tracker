@@ -2,37 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ProgressMetricResource;
+use Inertia\Inertia;
 use App\Models\ProgressMetric;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ProgressMetricResource;
 use App\Http\Requests\StoreProgressMetricRequest;
 use App\Http\Requests\UpdateProgressMetricRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProgressMetricController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return AnonymousResourceCollection
-     */
-    public function index(): AnonymousResourceCollection
+    public function index()
     {
-        return ProgressMetricResource::collection(ProgressMetric::all());
+        return Inertia::render('ProgressMetric/Index', [
+            'metrics' => Auth::user()->progressMetrics,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreProgressMetricRequest $request
-     * @return ProgressMetricResource
-     */
-    public function store(StoreProgressMetricRequest $request): ProgressMetricResource
+    public function store(StoreProgressMetricRequest $request)
     {
         $validated = $request->validated();
 
-        $progressMetric = ProgressMetric::create($validated);
+        ProgressMetric::create([
+            'user_id' => Auth::id(),
+            'weight' => $validated['weight'],
+            'body_fat_percentage' => $validated['body_fat_percentage'],
+            'muscle_mass' => $validated['muscle_mass'],
+            'notes' => $validated['notes']
+        ]);
 
-        return new ProgressMetricResource($progressMetric);
+        return to_route('progress-metrics.index');
     }
 
     /**
@@ -62,16 +61,10 @@ class ProgressMetricController extends Controller
         return new ProgressMetricResource($progressMetric);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param ProgressMetric $progressMetric
-     * @return JsonResponse
-     */
-    public function destroy(ProgressMetric $progressMetric): JsonResponse
+    public function destroy(ProgressMetric $progressMetric)
     {
         $progressMetric->delete();
 
-        return response()->json('Progress metrics deleted!');
+        return to_route('progress-metrics.index');
     }
 }
