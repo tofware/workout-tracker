@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
- *
+ * 
  *
  * @property-read Equipment|null $equipment
  * @property-read MuscleGroup|null $muscleGroup
@@ -111,11 +111,6 @@ class Exercise extends Model
     public function exerciseSets(): HasMany
     {
         return $this->hasMany(ExerciseSet::class);
-    }
-
-    public function exerciseHistory(): HasMany
-    {
-        return $this->hasMany(ExerciseHistory::class);
     }
 
     public function goals(): HasMany

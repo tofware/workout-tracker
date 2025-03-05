@@ -22,8 +22,9 @@ const submit = () => {
     <Head title="Workout Exercises" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <section id="content" class="bg-white h-full">
+
+            <div class="sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div
                         class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
@@ -134,9 +135,10 @@ const submit = () => {
                     </div>
 
                     <form @submit.prevent="submit">
-                        <div>
-                            <label for="exercise">Exercise</label>
-                            <select v-model="form.exercise" id="exercise" required>
+                        <div class="mt-4 mb-4">
+                            <h2 class="block font-medium text-gray-700">Exercise</h2>
+                            <select v-model="form.exercise" id="exercise" required
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--</option>
                                 <option v-for="exercise in props.exercises" :value="exercise.id" :key="exercise.id">
                                     {{ exercise.name }}
@@ -146,10 +148,14 @@ const submit = () => {
                         <div class="mt-2 text-sm text-red-600" v-show="form.errors['exercise']">
                             {{ form.errors['exercise'] }}
                         </div>
-                        <button>Submit</button>
+                        <button type="submit"
+                            class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            Submit
+                        </button>
                     </form>
+
                 </div>
             </div>
-        </div>
+        </section>
     </AuthenticatedLayout>
 </template>

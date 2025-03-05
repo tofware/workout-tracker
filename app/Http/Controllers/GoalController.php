@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Goal;
 use Inertia\Inertia;
 use App\Models\Exercise;
-use App\Http\Resources\GoalResource;
+use App\Enums\GoalStatus;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreGoalRequest;
 
@@ -14,8 +14,13 @@ class GoalController extends Controller
 
     public function index()
     {
+        $goals = Auth::user()->goals->map(function ($goal) {
+            $goal->status_label = GoalStatus::from($goal->status)->label();
+            return $goal;
+        });
+
         return Inertia::render('Goals/Index', [
-            'goals' => Auth::user()->goals,
+            'goals' => $goals,
             'exercises' => Exercise::all()
         ]);
     }

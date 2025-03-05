@@ -21,10 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('workouts', WorkoutController::class);
     Route::resource('progress-metrics', ProgressMetricController::class);
     Route::resource('goals', GoalController::class);
 
+    Route::resource('workouts', WorkoutController::class);
     Route::get('workouts/{workout}/exercises', [WorkoutController::class, 'getExercises'])->name('workouts.get-exercises');
     Route::post('workouts/{workout}/exercises/{exercise}', [WorkoutController::class, 'addExercise'])->name('workouts.add-exercises');
     Route::delete('workouts/{workout}/exercises/{exercise}', [WorkoutController::class, 'removeExercise'])->name('workouts.remove-exercises');

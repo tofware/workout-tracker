@@ -102,53 +102,58 @@ const submit = () => {
                                         </p>
                                     </td>
                                     <td class="p-4 border-b border-blue-gray-50">
-                                        <!-- <a href="#"
-                                            class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                                            Edit
-                                        </a> -->
-                                        <!-- <Link
-                                            class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
-                                            :href="`/workouts/` + workout.id + `/exercises`">Exercises</Link> -->
-                                        <Link :href="'/progress-metrics/' +  metric.id" method="delete" as="button">Delete</Link>
+                                        <Link :href="'/progress-metrics/' + metric.id" method="delete" as="button">
+                                        Delete</Link>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <form @submit.prevent="submit">
-                        <div>
-                            <label for="weight">Weight</label>
-                            <input v-model="form.weight" id="weight" required>
+                    <form @submit.prevent="submit" class="m-3 max-w-lg">
+                        <div class="mb-4">
+                            <label for="weight" class="block text-sm font-medium text-gray-700">Weight</label>
+                            <input v-model="form.weight" id="weight" required placeholder="Enter your weight"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mt-2 text-sm text-red-600" v-show="form.errors['weight']">
                             {{ form.errors['weight'] }}
                         </div>
 
-                        <div>
-                            <label for="body_fat_percentage">Body fat percentage</label>
-                            <input v-model="form.body_fat_percentage" id="body_fat_percentage" required>
+                        <div class="mb-4">
+                            <label for="body_fat_percentage" class="block text-sm font-medium text-gray-700">Body fat
+                                percentage</label>
+                            <input v-model="form.body_fat_percentage" id="body_fat_percentage" required
+                                placeholder="Enter your body fat percentage"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mt-2 text-sm text-red-600" v-show="form.errors['body_fat_percentage']">
                             {{ form.errors['body_fat_percentage'] }}
                         </div>
 
-                        <div>
-                            <label for="muscle_mass">Muscle mass</label>
-                            <input v-model="form.muscle_mass" id="muscle_mass" required>
+                        <div class="mb-4">
+                            <label for="muscle_mass" class="block text-sm font-medium text-gray-700">Muscle mass</label>
+                            <input v-model="form.muscle_mass" id="muscle_mass" required
+                                placeholder="Enter your muscle mass"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mt-2 text-sm text-red-600" v-show="form.errors['muscle_mass']">
                             {{ form.errors['muscle_mass'] }}
                         </div>
 
-                        <div>
-                            <label for="notes">Notes</label>
-                            <input v-model="form.notes" id="notes" required>
+                        <div class="mb-4">
+                            <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                            <input v-model="form.notes" id="notes" required placeholder="Enter any additional notes"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mt-2 text-sm text-red-600" v-show="form.errors['notes']">
                             {{ form.errors['notes'] }}
                         </div>
-                        <button>Submit</button>
+
+                        <button type="submit"
+                            class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            Submit
+                        </button>
                     </form>
                 </div>
             </div>
