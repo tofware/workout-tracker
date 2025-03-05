@@ -22,7 +22,7 @@ const props = defineProps({
         </template>
 
         <section id="content"
-            class="w-[100wh-60px] lg:w-[100wh-250px] ml-[60px] lg:ml-[40px] lg:mr-[40px] transition-all duration-500 ease-in-out bg-clip-border rounded-xl bg-white">
+            class="bg-white h-full">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="bg-slate-50 p-5 m-2 rounded-md flex justify-between items-center shadow">

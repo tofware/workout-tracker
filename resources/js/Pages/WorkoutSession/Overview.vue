@@ -6,6 +6,7 @@ const props = defineProps({
     workout: Object,
     exercises: Object,
     workoutSession: Object,
+    exercises_count: Number
 })
 
 const redirect = () => {
@@ -14,23 +15,22 @@ const redirect = () => {
 </script>
 
 <template>
+
     <Head title="Workout Details" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Workout Overview
-            </h2>
-        </template>
-        <div class="py-12">
-            <div class="mx-auto max-w-3xl sm:px-6 lg:px-8">
-                <div class="bg-white shadow-md sm:rounded-lg p-6">
-                    Details
-                    <button @click="redirect" class="px-4 py-2 bg-blue-500 text-white rounded">
-                        Start Workout
-                    </button>
+        <section id="content" class="bg-white h-full">
+            <div class="max-w-lg mx-auto bg-white p-6">
+                <div class="mt-6 p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">This workout plan contains a total of {{ props.exercises_count }} exercises.</h3>
+                    <p v-for="exercise in workout.exercises">
+                        <p class="text-md text-gray-600"><strong> {{ exercise.name }} </strong> - Difficulty: {{ exercise.difficulty }}</p>
+                    </p>
                 </div>
+                <button @click="redirect" class="w-full rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Start Workout
+                </button>
             </div>
-        </div>
+        </section>
     </AuthenticatedLayout>
 </template>

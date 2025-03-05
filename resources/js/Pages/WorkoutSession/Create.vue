@@ -10,35 +10,33 @@ const form = useForm({ workout: '' });
 </script>
 
 <template>
-    <Head title="Workout Create" />
+
+    <Head title="Choose Workout" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Create workout
-            </h2>
-        </template>
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <form @submit.prevent="form.post(route('workout-sessions.store'))">
-                            <div>
-                            <label for="workout">Workout</label>
-                                <select v-model="form.workout" id="workout" required>
-                                    <option value="">--</option>
-                                    <option v-for="workout in props.workouts" :value="workout.id" :key="workout.id">
-                                        {{  workout.name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <button type="submit" class="inline-block rounded-md bg-blue-500 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
-                                Start Workout Session
-                            </button>
-                        </form>
+        <section id="content" class="bg-white h-full">
+            <div class="max-w-md mx-auto bg-white p-6">
+                <form @submit.prevent="form.post(route('workout-sessions.store'))" class="space-y-4">
+                    <h1
+                        class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-3xl">
+                        Choose a workout</h1>
+                    <div>
+                        <label for="workout" class="block text-sm font-medium text-gray-700">Workout</label>
+                        <select v-model="form.workout" id="workout" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">--</option>
+                            <option v-for="workout in props.workouts" :value="workout.id" :key="workout.id">
+                                {{ workout.name }}
+                            </option>
+                        </select>
                     </div>
-                </div>
+
+                    <button type="submit"
+                        class="w-full rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Start Workout Session
+                    </button>
+                </form>
             </div>
-        </div>
+        </section>
     </AuthenticatedLayout>
 </template>

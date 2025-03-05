@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex bg-gray-100">
         <!-- Sidebar -->
         <aside
             class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-screen w-64 p-4 shadow-xl shadow-blue-gray-900/5">

@@ -12,7 +12,12 @@ const props = defineProps({
 const exercises = ref(props.exercises.map(exercise => ({
     id: exercise.id,
     name: exercise.name,
-    sets: [{reps: null, weight: null, notes: ''}],
+    difficulty: exercise.difficulty,
+    force: exercise.force,
+    mechanic: exercise.mechanic,
+    instructions: exercise.instructions,
+    equipment: exercise.equipment.name,
+    sets: [{ reps: null, weight: null, notes: '' }],
 })));
 const currentExerciseIndex = ref(0);
 const loading = ref(false);
@@ -44,7 +49,7 @@ const nextExercise = async () => {
 
         if (currentExerciseIndex.value < exercises.value.length - 1) {
             currentExerciseIndex.value++;
-        }else{
+        } else {
             router.get(route('workout-sessions.finish', props.workoutSession));
         }
     } catch (error) {
@@ -62,61 +67,63 @@ const prevExercise = () => {
 </script>
 
 <template>
+
     <Head title="Workout Details" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ workout.name }} - Exercise {{ currentExerciseIndex + 1 }} of {{ exercises.length }}
-            </h2>
-        </template>
-        <div class="py-12">
-            <div class="mx-auto max-w-3xl sm:px-6 lg:px-8">
-                <div class="bg-white shadow-md sm:rounded-lg p-6">
+        <section id="content" class="bg-white h-full">
+            <div class="max-w-4xl mx-auto bg-white p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                    Workout: {{ workout.name }}
+                </h2>
 
-                    <h3 class="text-lg font-bold mb-4">{{ currentExercise.name }}</h3>
+                <p class="text-gray-600 mb-4 text-sm">
+                    Exercise {{ currentExerciseIndex + 1 }} of {{ exercises.length }}
+                </p>
 
-                    <div v-for="(set, index) in currentExercise.sets" :key="index" class="flex items-center space-x-2 mb-2">
-                        <input
-                            type="number"
-                            v-model="set.reps"
-                            class="border p-2 rounded w-full"
-                            placeholder="Reps"
-                            min="1"
-                            max="500"
-                        />
-                        <input
-                            type="number"
-                            v-model="set.weight"
-                            class="border p-2 rounded w-full"
-                            placeholder="Weight (kg)"
-                            min="0"
-                            max="1000"
-                        />
+                <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                    <h3 class="text-lg font-semibold text-gray-700">{{ currentExercise.name }}</h3>
+                    <p class="text-sm text-gray-600">Difficulty: {{ currentExercise.difficulty }}</p>
+                    <p class="text-sm text-gray-600">Force: {{ currentExercise.force }} </p>
+                    <p class="text-sm text-gray-600">Mechanic: {{ currentExercise.mechanic }}</p>
+                    <p class="text-sm text-gray-600">Equipment: {{ currentExercise.equipment }}</p>
+                </div>
 
-                        <input
-                            type="text"
-                            v-model="set.notes"
-                            class="border p-2 rounded w-full"
-                            placeholder="Notes (optional)"
-                        ></input>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="text-md font-semibold text-gray-700 mb-2">Instructions</h4>
+                    <ul class="list-decimal list-inside text-gray-600 text-sm space-y-2">
+                        <li v-for="(instruction, index) in currentExercise.instructions" :key="index">
+                            {{ instruction.instruction }}
+                        </li>
+                    </ul>
+                </div>
 
-                        <button v-if="currentExercise.sets.length > 1" @click="removeSet(index)" class="text-red-500">✖</button>
-                    </div>
+                <div v-for="(set, index) in currentExercise.sets" :key="index" class="flex items-center space-x-2 mb-2">
+                    <input type="number" v-model="set.reps" class="border p-2 rounded w-full" placeholder="Reps" min="1"
+                        max="500" />
+                    <input type="number" v-model="set.weight" class="border p-2 rounded w-full"
+                        placeholder="Weight (kg)" min="0" max="1000" />
 
-                    <button @click="addSet" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">+ Add Set</button>
+                    <input type="text" v-model="set.notes" class="border p-2 rounded w-full"
+                        placeholder="Notes (optional)"></input>
 
-                    <div class="mt-4 flex justify-between">
-                        <button v-if="currentExerciseIndex > 0" @click="prevExercise" class="bg-gray-500 text-white px-4 py-2 rounded">
-                            Previous
-                        </button>
-                        <button @click="nextExercise" class="bg-green-500 text-white px-4 py-2 rounded" :disabled="loading">
-                            <span v-if="loading">Saving...</span>
-                            <span v-else>Next</span>
-                        </button>
-                    </div>
+                    <button v-if="currentExercise.sets.length > 1" @click="removeSet(index)"
+                        class="text-red-500">✖</button>
+                </div>
+
+                <button @click="addSet" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">+ Add Set</button>
+
+                <div class="mt-4 flex justify-between">
+                    <button v-if="currentExerciseIndex > 0" @click="prevExercise"
+                        class="bg-gray-500 text-white px-4 py-2 rounded">
+                        Previous
+                    </button>
+                    <button @click="nextExercise" class="bg-green-500 text-white px-4 py-2 rounded" :disabled="loading">
+                        <span v-if="loading">Saving...</span>
+                        <span v-else>Next</span>
+                    </button>
                 </div>
             </div>
-        </div>
+        </section>
     </AuthenticatedLayout>
 </template>

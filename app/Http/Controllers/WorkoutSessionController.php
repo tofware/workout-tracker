@@ -31,7 +31,8 @@ class WorkoutSessionController extends Controller
         return Inertia::render('WorkoutSession/Overview', [
             'workout' => $workout,
             'exercises' => $workout->exercises,
-            'workoutSession' => $workoutSession
+            'workoutSession' => $workoutSession,
+            'exercises_count' => $workout->exercises()->count()
         ]);
     }
 
@@ -41,7 +42,7 @@ class WorkoutSessionController extends Controller
 
         return Inertia::render('WorkoutSession/Start', [
             'workout' => $workout,
-            'exercises' => $workout->exercises,
+            'exercises' => $workout->exercises()->with('instructions', 'equipment')->get(),
             'workoutSession' => $workoutSession
         ]);
     }
