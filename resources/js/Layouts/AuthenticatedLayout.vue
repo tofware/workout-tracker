@@ -46,6 +46,18 @@ defineProps({
                     Workouts
                 </NavLink>
 
+                <NavLink :href="route('workout-sessions.index')" :active="route().current('workout-sessions.index')"
+                    class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                    <div class="grid place-items-center mr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M6.75 2.25a.75.75 0 00-1.5 0v1.5h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v3h-3a.75.75 0 000 1.5h3v1.5a.75.75 0 001.5 0v-1.5h10.5v1.5a.75.75 0 001.5 0v-1.5h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-3h3a.75.75 0 000-1.5h-3v-1.5a.75.75 0 00-1.5 0v1.5H6.75v-1.5zm10.5 3h-10.5v3h10.5v-3zm-10.5 4.5h10.5v3h-10.5v-3zm10.5 4.5h-10.5v3h10.5v-3z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    Workout Sessions
+                </NavLink>
+
                 <NavLink :href="route('goals.index')" :active="route().current('goals.index')"
                     class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all text-gray-900 hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
                     <div class="grid place-items-center mr-4">

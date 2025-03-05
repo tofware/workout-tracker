@@ -6,10 +6,18 @@ use Inertia\Inertia;
 use App\Models\Workout;
 use App\Models\WorkoutSession;
 use App\Http\Requests\StoreWorkoutSessionRequest;
+use App\Http\Requests\UpdateWorkoutSessionRequest;
 use Illuminate\Support\Facades\Auth;
 
 class WorkoutSessionController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('WorkoutSession/Index', [
+            'sessions' => WorkoutSession::whereNotNull('duration')->get(),
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('WorkoutSession/Create', [
@@ -47,14 +55,17 @@ class WorkoutSessionController extends Controller
         ]);
     }
 
-    public function finish(WorkoutSession $workoutSession)
+    public function finish(WorkoutSession $workoutSession, UpdateWorkoutSessionRequest $request)
     {
-        $workout = $workoutSession->workout;
+        $validated = $request->validated();
 
-        return Inertia::render('WorkoutSession/Finish', [
-            'workout' => $workout,
-            'exercises' => $workout->exercises,
-            'workoutSession' => $workoutSession
+        $workoutSession->update([
+            'duration' => $validated['duration'],
+            'notes' => $validated['notes'],
+            'calories_burned' => $validated['calories_burned'],
+            'average_intensity' => $validated['average_intensity']
         ]);
+
+        return to_route('workout-sessions.index');
     }
 }

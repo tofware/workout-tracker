@@ -3,18 +3,15 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
-    workout: Object,
-    exercises: Object
+    sessions: Object,
 })
 </script>
 
 <template>
-
-    <Head title="Workout Details" />
+    <Head title="Workout Sessions" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div
                         class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
@@ -24,47 +21,69 @@ const props = defineProps({
                                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Exercise Name
+                                            Notes
                                         </p>
                                     </th>
                                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Exercise Difficulty
+                                            Duration
                                         </p>
                                     </th>
                                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Order
+                                            Calories Burned
                                         </p>
                                     </th>
                                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Actions
+                                            Average Intensity
+                                        </p>
+                                    </th>
+                                    <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p
+                                            class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Created at
                                         </p>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="exercise in props.exercises">
+                                <tr v-for="session in props.sessions">
                                     <td class="p-4 border-b border-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                            {{ exercise.name }}
+                                            {{ session.notes }}
                                         </p>
                                     </td>
+
                                     <td class="p-4 border-b border-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                            {{ exercise.difficulty }}
+                                            {{ session.duration }}
                                         </p>
                                     </td>
+
                                     <td class="p-4 border-b border-blue-gray-50">
                                         <p
                                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                            {{ exercise.pivot.order }}
+                                            {{ session.calories_burned }}
+                                        </p>
+                                    </td>
+
+                                    <td class="p-4 border-b border-blue-gray-50">
+                                        <p
+                                            class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                            {{ session.average_intensity }}
+                                        </p>
+                                    </td>
+
+                                    <td class="p-4 border-b border-blue-gray-50">
+                                        <p
+                                            class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                            {{ session.created_at }}
                                         </p>
                                     </td>
                                 </tr>
@@ -73,6 +92,5 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
-        </div>
     </AuthenticatedLayout>
 </template>

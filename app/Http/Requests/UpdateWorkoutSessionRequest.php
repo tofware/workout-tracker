@@ -23,8 +23,6 @@ class UpdateWorkoutSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workout_id' => ['sometimes', 'exists:App\Models\Workout,id'],
-            'user_id' => ['sometimes', 'exists:App\Models\User,id'],
             'notes' => ['nullable', 'string'],
             'duration' => ['nullable', 'integer'],
             'calories_burned' => ['nullable', 'integer'],

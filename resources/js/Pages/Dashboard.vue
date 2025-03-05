@@ -15,12 +15,6 @@ const props = defineProps({
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Dashboard
-            </h2>
-        </template>
-
         <section id="content"
             class="bg-white h-full">
 

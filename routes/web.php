@@ -30,10 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('workouts/{workout}/exercises/{exercise}', [WorkoutController::class, 'removeExercise'])->name('workouts.remove-exercises');
 
     Route::prefix('workout-sessions')->controller(WorkoutSessionController::class)->group(function () {
+        Route::get('/', 'index')->name('workout-sessions.index');
         Route::get('create', 'create')->name('workout-sessions.create');
         Route::post('/', 'store')->name('workout-sessions.store');
         Route::get('start/{workoutSession}', 'start')->name('workout-sessions.start');
-        Route::get('finish/{workoutSession}', 'finish')->name('workout-sessions.finish');
+        Route::post('finish/{workoutSession}', 'finish')->name('workout-sessions.finish');
     });
 
     Route::post('/exercise-sets', [ExerciseSetController::class, 'store'])->name('exercise-sets.store');

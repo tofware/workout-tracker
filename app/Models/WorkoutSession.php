@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $workout_id
@@ -57,6 +57,11 @@ class WorkoutSession extends Model
         'calories_burned',
         'average_intensity'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:D d M Y H:i:s',
+        'updated_at' => 'datetime:D d M Y H:i:s'
+   	];
 
     public function user(): BelongsTo
     {
