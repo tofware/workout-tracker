@@ -9,3 +9,10 @@
 
 ## About This Project
 
+This project is built using **Laravel**, **Vue.js**, and **Inertia.js** to provide a seamless full-stack development experience.  
+
+## Features  
+- Backend powered by **Laravel**  
+- Frontend developed with **Vue.js**  
+- Server-side rendering and routing handled by **Inertia.js**  
+- Fully tested using **PHPUnit**  
