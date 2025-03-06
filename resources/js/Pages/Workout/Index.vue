@@ -19,7 +19,7 @@ const confirmDelete = () => {
     <Head title="Workout" />
 
     <AuthenticatedLayout>
-        <section id="content" class="bg-white h-full">
+        <section id="content" class="bg-white h-full sm:rounded-lg">
             <div class="sm:px-6 lg:px-8 flex">
                 <Link
                     class="mt-3 rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

@@ -16,7 +16,7 @@ const props = defineProps({
 
     <AuthenticatedLayout>
         <section id="content"
-            class="bg-white h-full">
+            class="bg-white h-full sm:rounded-lg">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="bg-slate-50 p-5 m-2 rounded-md flex justify-between items-center shadow">

@@ -12,7 +12,7 @@ const props = defineProps({
     <Head title="Workout Sessions" />
 
     <AuthenticatedLayout>
-        <section id="content" class="bg-white h-full">
+        <section id="content" class="bg-white h-full sm:rounded-lg">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div
                     class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
