@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
+ *
  * @property-read Equipment|null $equipment
  * @property-read MuscleGroup|null $muscleGroup
- *
  * @method static ExerciseFactory factory($count = null, $state = [])
  * @method static Builder<static>|Exercise newModelQuery()
  * @method static Builder<static>|Exercise newQuery()
  * @method static Builder<static>|Exercise query()
- *
  * @property int $id
  * @property string $name
  * @property array|null $instructions
@@ -34,7 +34,6 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $workout_exercises_count
  * @property-read Collection<int, \App\Models\Workout> $workouts
  * @property-read int|null $workouts_count
- *
  * @method static Builder<static>|Exercise whereCreatedAt($value)
  * @method static Builder<static>|Exercise whereDifficulty($value)
  * @method static Builder<static>|Exercise whereEquipmentId($value)
@@ -43,7 +42,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Exercise whereMuscleGroupId($value)
  * @method static Builder<static>|Exercise whereName($value)
  * @method static Builder<static>|Exercise whereUpdatedAt($value)
- *
  * @property-read Collection<int, \App\Models\ExerciseSet> $exerciseSets
  * @property-read int|null $exercise_sets_count
  * @property-read Collection<int, \App\Models\ExerciseHistory> $exerciseHistory
@@ -58,11 +56,9 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $instructions_count
  * @property-read Collection<int, \App\Models\MuscleGroup> $muscleGroups
  * @property-read int|null $muscle_groups_count
- *
  * @method static Builder<static>|Exercise whereExerciseCategoryId($value)
  * @method static Builder<static>|Exercise whereForce($value)
  * @method static Builder<static>|Exercise whereMechanic($value)
- *
  * @mixin Eloquent
  */
 class Exercise extends Model

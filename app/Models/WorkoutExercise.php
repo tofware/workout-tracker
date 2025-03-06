@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property int $id
  * @property int $workout_id
  * @property int $exercise_id
@@ -16,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Exercise $exercise
  * @property-read \App\Models\Workout $workout
- *
  * @method static \Database\Factories\WorkoutExerciseFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise newQuery()
@@ -27,9 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkoutExercise whereWorkoutId($value)
- *
  * @property-read \App\Models\TFactory|null $use_factory
- *
  * @mixin \Eloquent
  */
 class WorkoutExercise extends Model

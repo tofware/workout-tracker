@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
+ *
  * @property int $id
  * @property int $user_id
  * @property int $category_id
@@ -22,7 +24,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read WorkoutCategory $category
  * @property-read User $user
- *
  * @method static WorkoutFactory factory($count = null, $state = [])
  * @method static Builder<static>|Workout newModelQuery()
  * @method static Builder<static>|Workout newQuery()
@@ -33,7 +34,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Workout whereName($value)
  * @method static Builder<static>|Workout whereUpdatedAt($value)
  * @method static Builder<static>|Workout whereUserId($value)
- *
  * @property-read Collection<int, Exercise> $exercises
  * @property-read int|null $exercises_count
  * @property-read Collection<int, WorkoutExercise> $workoutExercises
@@ -42,9 +42,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $workout_sessions_count
  * @property int $workout_category_id
  * @property-read \App\Models\TFactory|null $use_factory
- *
  * @method static Builder<static>|Workout whereWorkoutCategoryId($value)
- *
  * @mixin Eloquent
  */
 class Workout extends Model

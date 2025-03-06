@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property GoalStatus $experience_level
  * @property-read \App\Models\Exercise|null $exercise
  * @property-read \App\Models\User|null $user
- *
  * @method static \Database\Factories\GoalFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal query()
- *
  * @property int $id
  * @property int $user_id
  * @property int $exercise_id
@@ -29,7 +29,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\TFactory|null $use_factory
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereDeadline($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereExerciseId($value)
@@ -40,7 +39,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereTargetValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Goal whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class Goal extends Model
