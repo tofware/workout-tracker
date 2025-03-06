@@ -16,7 +16,7 @@ class WorkoutSeeder extends Seeder
     {
         $categories = WorkoutCategory::all();
 
-        for($i = 0; $i < 5; $i++){
+        for ($i = 0; $i < 5; $i++) {
             Workout::create([
                 'name' => fake()->name,
                 'workout_category_id' => $categories->random()->id,

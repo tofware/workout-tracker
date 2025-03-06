@@ -26,7 +26,7 @@ class UpdateWorkoutSessionRequest extends FormRequest
             'notes' => ['nullable', 'string'],
             'duration' => ['nullable', 'integer'],
             'calories_burned' => ['nullable', 'integer'],
-            'average_intensity' => ['nullable', 'integer']
+            'average_intensity' => ['nullable', 'integer'],
         ];
     }
 }

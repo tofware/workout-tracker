@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\ProgressMetric;
-use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 class ProgressMetricsTest extends TestCase
 {
@@ -20,7 +20,7 @@ class ProgressMetricsTest extends TestCase
         $response = $this
             ->actingAs($user)
             ->get(route('progress-metrics.index'))
-            ->assertInertia( fn(Assert $page) => $page
+            ->assertInertia(fn (Assert $page) => $page
                 ->component('ProgressMetric/Index')
                 ->has('metrics', 3)
                 ->where('metrics.0.weight', $metrics[0]->weight)

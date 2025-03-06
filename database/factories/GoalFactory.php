@@ -27,7 +27,7 @@ class GoalFactory extends Factory
             'target_value' => fake()->numberBetween(1, 100),
             'deadline' => fake()->date,
             'status' => fake()->randomElement(array_keys(GoalStatus::cases())),
-            'notes' => fake()->text(30)
+            'notes' => fake()->text(30),
         ];
     }
 }

@@ -17,7 +17,7 @@ class ExerciseSeeder extends Seeder
         $muscleGroups = MuscleGroup::all();
         $equipments = Equipment::all();
 
-        for($i = 0; $i < 20; $i++){
+        for ($i = 0; $i < 20; $i++) {
             Exercise::create([
                 'name' => fake()->name,
                 'difficulty' => fake()->firstName,

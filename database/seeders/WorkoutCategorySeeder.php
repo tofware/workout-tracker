@@ -32,7 +32,7 @@ class WorkoutCategorySeeder extends Seeder
             'Lower Body',
             'Push Day',
             'Pull Day',
-            'Leg Day'
+            'Leg Day',
         ];
 
         foreach ($categories as $category) {

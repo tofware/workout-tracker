@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseSetController;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgressMetricController;
+use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\WorkoutSessionController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');

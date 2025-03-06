@@ -22,7 +22,7 @@ class WorkoutExerciseFactory extends Factory
         return [
             'order' => fake()->randomDigit(),
             'workout_id' => Workout::factory()->create(),
-            'exercise_id' => Exercise::factory()->create()
+            'exercise_id' => Exercise::factory()->create(),
         ];
     }
 }

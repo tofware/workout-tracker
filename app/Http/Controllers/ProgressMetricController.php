@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
+use App\Http\Requests\StoreProgressMetricRequest;
 use App\Models\ProgressMetric;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreProgressMetricRequest;
+use Inertia\Inertia;
 
 class ProgressMetricController extends Controller
 {
@@ -25,7 +25,7 @@ class ProgressMetricController extends Controller
             'weight' => $validated['weight'],
             'body_fat_percentage' => $validated['body_fat_percentage'],
             'muscle_mass' => $validated['muscle_mass'],
-            'notes' => $validated['notes']
+            'notes' => $validated['notes'],
         ]);
 
         return to_route('progress-metrics.index');

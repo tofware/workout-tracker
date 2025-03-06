@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Exercise;
-use Tests\TestCase;
 use App\Models\User;
 use App\Models\Workout;
 use App\Models\WorkoutSession;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ExerciseSetTest extends TestCase
 {
@@ -19,7 +19,7 @@ class ExerciseSetTest extends TestCase
         $workout = Workout::factory()->create();
         $workoutSession = WorkoutSession::factory()->create([
             'user_id' => $user->id,
-            'workout_id' => $workout->id
+            'workout_id' => $workout->id,
         ]);
         $exercise = Exercise::factory()->create();
 
@@ -30,12 +30,12 @@ class ExerciseSetTest extends TestCase
                 [
                     'reps' => 12,
                     'weight' => 25,
-                    'notes' => 'test' ?? null
+                    'notes' => 'test' ?? null,
                 ],
                 [
                     'reps' => 12,
                     'weight' => 25,
-                    'notes' => 'test' ?? null
+                    'notes' => 'test' ?? null,
                 ],
             ],
         ];

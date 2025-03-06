@@ -15,13 +15,10 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -37,6 +34,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read int|null $notifications_count
  * @property-read Collection<int, Workout> $workouts
  * @property-read int|null $workouts_count
+ *
  * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder<static>|User newModelQuery()
  * @method static Builder<static>|User newQuery()
@@ -52,6 +50,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static Builder<static>|User whereProfilePicture($value)
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
+ *
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read Collection<int, \App\Models\WorkoutSession> $workoutSessions
@@ -63,6 +62,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read Collection<int, \App\Models\Goal> $goals
  * @property-read int|null $goals_count
  * @property-read \App\Models\TFactory|null $use_factory
+ *
  * @mixin Eloquent
  */
 class User extends Authenticatable
@@ -81,7 +81,7 @@ class User extends Authenticatable
         'experience_level',
         'profile_picture',
         'goal',
-        'password'
+        'password',
     ];
 
     /**
@@ -104,7 +104,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'experience_level' => ExperienceLevel::class
+            'experience_level' => ExperienceLevel::class,
         ];
     }
 

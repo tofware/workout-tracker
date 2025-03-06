@@ -7,7 +7,6 @@ use App\Models\ExerciseSet;
 
 class ExerciseSetController extends Controller
 {
-
     public function store(StoreExerciseSetRequest $request)
     {
         $validated = $request->validated();
@@ -20,7 +19,7 @@ class ExerciseSetController extends Controller
                 'set_number' => $setNumber,
                 'repetitions' => $set['reps'],
                 'weight' => $set['weight'],
-                'notes' => $set['notes'] ?? null
+                'notes' => $set['notes'] ?? null,
             ]);
 
             $setNumber++;

@@ -12,8 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
- *
  * @property int $id
  * @property int $workout_id
  * @property int $user_id
@@ -25,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read User $user
  * @property-read Workout $workout
+ *
  * @method static WorkoutSessionFactory factory($count = null, $state = [])
  * @method static Builder<static>|WorkoutSession newModelQuery()
  * @method static Builder<static>|WorkoutSession newQuery()
@@ -38,9 +37,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|WorkoutSession whereUpdatedAt($value)
  * @method static Builder<static>|WorkoutSession whereUserId($value)
  * @method static Builder<static>|WorkoutSession whereWorkoutId($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ExerciseSet> $exerciseSets
  * @property-read int|null $exercise_sets_count
  * @property-read \App\Models\TFactory|null $use_factory
+ *
  * @mixin Eloquent
  */
 class WorkoutSession extends Model
@@ -55,13 +56,13 @@ class WorkoutSession extends Model
         'notes',
         'duration',
         'calories_burned',
-        'average_intensity'
+        'average_intensity',
     ];
 
     protected $casts = [
         'created_at' => 'datetime:D d M Y H:i:s',
-        'updated_at' => 'datetime:D d M Y H:i:s'
-   	];
+        'updated_at' => 'datetime:D d M Y H:i:s',
+    ];
 
     public function user(): BelongsTo
     {

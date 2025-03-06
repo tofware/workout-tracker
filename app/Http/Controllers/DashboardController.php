@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
@@ -15,7 +15,7 @@ class DashboardController extends Controller
             'workoutsCompleted' => $user->workoutSessions->count(),
             'goalsAchieved' => $user->goals->where('status', 1)->count(),
             'setsDone' => $user->workoutSessions()->withCount('exerciseSets')->get()->sum('exercise_sets_count'),
-            'timeWorkingOut' => $user->workoutSessions->sum('duration')
+            'timeWorkingOut' => $user->workoutSessions->sum('duration'),
         ]);
     }
 }

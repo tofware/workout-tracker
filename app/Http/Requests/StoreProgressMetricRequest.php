@@ -26,7 +26,7 @@ class StoreProgressMetricRequest extends FormRequest
             'weight' => ['required', 'integer', 'min:1', 'max:100'],
             'body_fat_percentage' => ['nullable', 'integer', 'min:1', 'max:100'],
             'muscle_mass' => ['nullable', 'integer', 'min:1', 'max:100'],
-            'notes' => ['nullable', 'string', 'min:1', 'max:100']
+            'notes' => ['nullable', 'string', 'min:1', 'max:100'],
         ];
     }
 }

@@ -11,14 +11,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- * 
- *
  * @method static Builder<static>|ExerciseSet newModelQuery()
  * @method static Builder<static>|ExerciseSet newQuery()
  * @method static Builder<static>|ExerciseSet query()
+ *
  * @property-read Exercise|null $exercise
  * @property-read WorkoutSession|null $workoutSession
+ *
  * @method static ExerciseSetFactory factory($count = null, $state = [])
+ *
  * @property int $id
  * @property int $workout_session_id
  * @property int $exercise_id
@@ -29,6 +30,7 @@ use Illuminate\Support\Carbon;
  * @property int|null $rest_time
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static Builder<static>|ExerciseSet whereCreatedAt($value)
  * @method static Builder<static>|ExerciseSet whereExerciseId($value)
  * @method static Builder<static>|ExerciseSet whereId($value)
@@ -39,7 +41,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|ExerciseSet whereUpdatedAt($value)
  * @method static Builder<static>|ExerciseSet whereWeight($value)
  * @method static Builder<static>|ExerciseSet whereWorkoutSessionId($value)
+ *
  * @property-read \App\Models\TFactory|null $use_factory
+ *
  * @mixin Eloquent
  */
 class ExerciseSet extends Model

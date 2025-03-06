@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Enums\GoalStatus;
+use App\Models\Exercise;
 use App\Models\Goal;
 use App\Models\User;
-use App\Models\Exercise;
-use App\Enums\GoalStatus;
-use Inertia\Testing\AssertableInertia as Assert;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 class GoalTest extends TestCase
 {
@@ -20,13 +20,13 @@ class GoalTest extends TestCase
         $exercise = Exercise::factory()->create();
         $goals = Goal::factory(3)->create([
             'user_id' => $user->id,
-            'exercise_id' => $exercise->id
+            'exercise_id' => $exercise->id,
         ]);
 
         $response = $this
             ->actingAs($user)
             ->get(route('goals.index'))
-            ->assertInertia(fn(Assert $page) => $page
+            ->assertInertia(fn (Assert $page) => $page
                 ->component('Goals/Index')
                 ->has('goals', 3)
                 ->where('goals.0.goal_type', $goals[0]->goal_type)
@@ -47,7 +47,7 @@ class GoalTest extends TestCase
             'target_value' => fake()->numberBetween(1, 100),
             'deadline' => fake()->date,
             'status' => fake()->randomElement(array_keys(GoalStatus::cases())),
-            'notes' => fake()->text(30)
+            'notes' => fake()->text(30),
         ];
 
         $response = $this
@@ -72,7 +72,7 @@ class GoalTest extends TestCase
         $exercise = Exercise::factory()->create();
         $goal = Goal::factory()->create([
             'user_id' => $user->id,
-            'exercise_id' => $exercise->id
+            'exercise_id' => $exercise->id,
         ]);
 
         $response = $this

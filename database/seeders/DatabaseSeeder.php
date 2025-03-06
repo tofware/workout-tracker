@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Enums\GoalStatus;
+use App\Models\Exercise;
+use App\Models\ExerciseSet;
 use App\Models\Goal;
+use App\Models\ProgressMetric;
 use App\Models\User;
 use App\Models\Workout;
-use App\Models\Exercise;
-use App\Enums\GoalStatus;
-use App\Models\ExerciseSet;
-use App\Models\ProgressMetric;
-use App\Models\WorkoutSession;
-use App\Models\ExerciseHistory;
 use App\Models\WorkoutExercise;
+use App\Models\WorkoutSession;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,13 +23,13 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()
             ->create([
                 'email' => 'test@test.com',
-                'password' => 'test'
+                'password' => 'test',
             ]);
 
         $this->call([
             JsonSeeder::class,
             WorkoutCategorySeeder::class,
-            WorkoutSeeder::class
+            WorkoutSeeder::class,
         ]);
 
         $workouts = Workout::all();
@@ -71,7 +70,7 @@ class DatabaseSeeder extends Seeder
                     'target_value' => fake()->numberBetween(1, 100),
                     'deadline' => fake()->date,
                     'status' => fake()->randomElement(array_keys(GoalStatus::cases())),
-                    'notes' => fake()->text(30)
+                    'notes' => fake()->text(30),
                 ]);
             }
         });

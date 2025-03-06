@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Workout;
-use App\Models\WorkoutSession;
 use App\Http\Requests\StoreWorkoutSessionRequest;
 use App\Http\Requests\UpdateWorkoutSessionRequest;
+use App\Models\Workout;
+use App\Models\WorkoutSession;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class WorkoutSessionController extends Controller
 {
@@ -21,7 +21,7 @@ class WorkoutSessionController extends Controller
     public function create()
     {
         return Inertia::render('WorkoutSession/Create', [
-            'workouts' => Workout::all()
+            'workouts' => Workout::all(),
         ]);
     }
 
@@ -33,14 +33,14 @@ class WorkoutSessionController extends Controller
 
         $workoutSession = WorkoutSession::create([
             'workout_id' => $validated['workout'],
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
 
         return Inertia::render('WorkoutSession/Overview', [
             'workout' => $workout,
             'exercises' => $workout->exercises,
             'workoutSession' => $workoutSession,
-            'exercises_count' => $workout->exercises()->count()
+            'exercises_count' => $workout->exercises()->count(),
         ]);
     }
 
@@ -51,7 +51,7 @@ class WorkoutSessionController extends Controller
         return Inertia::render('WorkoutSession/Start', [
             'workout' => $workout,
             'exercises' => $workout->exercises()->with('instructions', 'equipment')->get(),
-            'workoutSession' => $workoutSession
+            'workoutSession' => $workoutSession,
         ]);
     }
 
@@ -63,7 +63,7 @@ class WorkoutSessionController extends Controller
             'duration' => $validated['duration'],
             'notes' => $validated['notes'],
             'calories_burned' => $validated['calories_burned'],
-            'average_intensity' => $validated['average_intensity']
+            'average_intensity' => $validated['average_intensity'],
         ]);
 
         return to_route('workout-sessions.index');

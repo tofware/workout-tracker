@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
 use App\Models\Workout;
 use App\Models\WorkoutSession;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 class WorkoutSessionTest extends TestCase
 {
@@ -19,14 +19,14 @@ class WorkoutSessionTest extends TestCase
         $workout = Workout::factory()->create();
         $workoutSession = WorkoutSession::factory()->create([
             'user_id' => $user->id,
-            'workout_id' => $workout->id
+            'workout_id' => $workout->id,
         ]);
 
         $response = $this
             ->actingAs($user)
             ->get(route('workout-sessions.index'))
             ->assertInertia(
-                fn(Assert $page) => $page
+                fn (Assert $page) => $page
                     ->component('WorkoutSession/Index')
                     ->has('sessions', 1)
             );

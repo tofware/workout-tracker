@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Models\Exercise;
 use App\Models\User;
 use App\Models\Workout;
-use App\Models\Exercise;
 use App\Models\WorkoutCategory;
 use App\Models\WorkoutExercise;
-use Inertia\Testing\AssertableInertia as Assert;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 class WorkoutTest extends TestCase
 {
@@ -24,7 +24,7 @@ class WorkoutTest extends TestCase
             ->actingAs($user)
             ->get(route('workouts.index'))
             ->assertInertia(
-                fn(Assert $page) => $page
+                fn (Assert $page) => $page
                     ->component('Workout/Index')
                     ->has('workouts', 3)
                     ->where('workouts.0.name', $workouts[0]->name)
@@ -42,7 +42,7 @@ class WorkoutTest extends TestCase
             ->actingAs($user)
             ->get(route('workouts.create'))
             ->assertInertia(
-                fn(Assert $page) => $page
+                fn (Assert $page) => $page
                     ->component('Workout/Create')
             );
 
@@ -112,7 +112,7 @@ class WorkoutTest extends TestCase
             ->get(route('workouts.get-exercises', $workout->id));
 
         $response->assertInertia(
-            fn(Assert $page) => $page
+            fn (Assert $page) => $page
                 ->component('Workout/Exercises')
                 ->has('exercises', 5)
         );

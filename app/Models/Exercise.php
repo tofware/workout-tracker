@@ -2,27 +2,26 @@
 
 namespace App\Models;
 
-use Eloquent;
-use Illuminate\Support\Carbon;
 use Database\Factories\ExerciseFactory;
-use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * 
- *
  * @property-read Equipment|null $equipment
  * @property-read MuscleGroup|null $muscleGroup
+ *
  * @method static ExerciseFactory factory($count = null, $state = [])
  * @method static Builder<static>|Exercise newModelQuery()
  * @method static Builder<static>|Exercise newQuery()
  * @method static Builder<static>|Exercise query()
+ *
  * @property int $id
  * @property string $name
  * @property array|null $instructions
@@ -35,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read int|null $workout_exercises_count
  * @property-read Collection<int, \App\Models\Workout> $workouts
  * @property-read int|null $workouts_count
+ *
  * @method static Builder<static>|Exercise whereCreatedAt($value)
  * @method static Builder<static>|Exercise whereDifficulty($value)
  * @method static Builder<static>|Exercise whereEquipmentId($value)
@@ -43,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static Builder<static>|Exercise whereMuscleGroupId($value)
  * @method static Builder<static>|Exercise whereName($value)
  * @method static Builder<static>|Exercise whereUpdatedAt($value)
+ *
  * @property-read Collection<int, \App\Models\ExerciseSet> $exerciseSets
  * @property-read int|null $exercise_sets_count
  * @property-read Collection<int, \App\Models\ExerciseHistory> $exerciseHistory
@@ -57,9 +58,11 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read int|null $instructions_count
  * @property-read Collection<int, \App\Models\MuscleGroup> $muscleGroups
  * @property-read int|null $muscle_groups_count
+ *
  * @method static Builder<static>|Exercise whereExerciseCategoryId($value)
  * @method static Builder<static>|Exercise whereForce($value)
  * @method static Builder<static>|Exercise whereMechanic($value)
+ *
  * @mixin Eloquent
  */
 class Exercise extends Model
@@ -72,7 +75,7 @@ class Exercise extends Model
         'difficulty',
         'force',
         'mechanic',
-        'equipment_id'
+        'equipment_id',
     ];
 
     public function category(): BelongsTo
@@ -88,7 +91,7 @@ class Exercise extends Model
     public function muscleGroups()
     {
         return $this->belongsToMany(MuscleGroup::class, 'exercise_muscle_groups')
-                    ->withPivot('primary');
+            ->withPivot('primary');
     }
 
     public function primaryMuscleGroups()
@@ -104,8 +107,8 @@ class Exercise extends Model
     public function workouts(): BelongsToMany
     {
         return $this->belongsToMany(Workout::class, 'workout_exercises')
-                ->withPivot('order')
-                ->orderBy('order');
+            ->withPivot('order')
+            ->orderBy('order');
     }
 
     public function exerciseSets(): HasMany

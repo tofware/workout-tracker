@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use Eloquent;
-use Illuminate\Support\Carbon;
 use Database\Factories\WorkoutFactory;
-use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * 
- *
  * @property int $id
  * @property int $user_id
  * @property int $category_id
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Carbon|null $updated_at
  * @property-read WorkoutCategory $category
  * @property-read User $user
+ *
  * @method static WorkoutFactory factory($count = null, $state = [])
  * @method static Builder<static>|Workout newModelQuery()
  * @method static Builder<static>|Workout newQuery()
@@ -34,6 +33,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder<static>|Workout whereName($value)
  * @method static Builder<static>|Workout whereUpdatedAt($value)
  * @method static Builder<static>|Workout whereUserId($value)
+ *
  * @property-read Collection<int, Exercise> $exercises
  * @property-read int|null $exercises_count
  * @property-read Collection<int, WorkoutExercise> $workoutExercises
@@ -42,7 +42,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int|null $workout_sessions_count
  * @property int $workout_category_id
  * @property-read \App\Models\TFactory|null $use_factory
+ *
  * @method static Builder<static>|Workout whereWorkoutCategoryId($value)
+ *
  * @mixin Eloquent
  */
 class Workout extends Model
@@ -53,13 +55,13 @@ class Workout extends Model
     protected $fillable = [
         'name',
         'workout_category_id',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
         'created_at' => 'datetime:D d M Y H:i:s',
-        'updated_at' => 'datetime:D d M Y H:i:s'
-   	];
+        'updated_at' => 'datetime:D d M Y H:i:s',
+    ];
 
     public function category(): BelongsTo
     {

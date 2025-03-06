@@ -24,7 +24,7 @@ class UpdateWorkoutRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'min:0', 'max:100'],
-            'category_id' => ['sometimes', 'exists:App\Models\Category,id']
+            'category_id' => ['sometimes', 'exists:App\Models\Category,id'],
         ];
     }
 }
