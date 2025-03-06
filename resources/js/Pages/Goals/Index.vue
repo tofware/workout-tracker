@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 const props = defineProps({
     goals: Object,
@@ -18,6 +19,13 @@ const form = useForm({
 const submit = () => {
     form.post(route('goals.store'));
 }
+
+const minDate = computed(() => {
+    const today = new Date();
+
+    return today.toISOString().split('T')[0];
+})
+
 </script>
 
 <template>
@@ -121,7 +129,7 @@ const submit = () => {
                 <div class="mb-4">
                     <label for="target_value" class="block text-sm font-medium text-gray-700">Target
                         Value</label>
-                    <input v-model="form.target_value" id="target_value" required placeholder="Enter your target value"
+                    <input v-model="form.target_value" id="target_value" type="number" required placeholder="Enter your target value"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="mt-2 text-sm text-red-600" v-show="form.errors['target_value']">
@@ -130,7 +138,7 @@ const submit = () => {
 
                 <div class="mb-4">
                     <label for="deadline" class="block text-sm font-medium text-gray-700">Deadline</label>
-                    <input v-model="form.deadline" id="deadline" type="date" required
+                    <input v-model="form.deadline" id="deadline" type="date" required :min="minDate"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="mt-2 text-sm text-red-600" v-show="form.errors['deadline']">
@@ -139,7 +147,7 @@ const submit = () => {
 
                 <div class="mb-4">
                     <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                    <input v-model="form.notes" id="notes" required placeholder="Enter any additional notes"
+                    <input v-model="form.notes" id="notes" placeholder="Enter any additional notes"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="mt-2 text-sm text-red-600" v-show="form.errors['notes']">

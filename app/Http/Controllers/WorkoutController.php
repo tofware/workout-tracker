@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreWorkoutRequest;
-use App\Http\Requests\UpdateWorkoutRequest;
-use App\Models\Exercise;
+use Inertia\Inertia;
 use App\Models\Workout;
+use App\Models\Exercise;
 use App\Models\WorkoutCategory;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\StoreWorkoutRequest;
+use App\Http\Requests\UpdateWorkoutRequest;
 
 class WorkoutController extends Controller
 {
     public function index()
     {
         return Inertia::render('Workout/Index', [
-            'workouts' => Workout::with('category')->get(),
+            'workouts' => Workout::with('category')->where('user_id', Auth::id())->get(),
         ]);
     }
 
@@ -65,10 +66,14 @@ class WorkoutController extends Controller
 
     public function getExercises(Workout $workout)
     {
+        $exercises = Cache::remember('exercises', 60 * 60 * 24, function() {
+            return Exercise::select('id', 'name')->get();
+        });
+
         return Inertia::render('Workout/Exercises', [
             'workout' => $workout,
             'workoutExercises' => $workout->exercises()->with('equipment', 'category', 'muscleGroups')->get(),
-            'exercises' => Exercise::all(),
+            'exercises' => $exercises,
         ]);
     }
 

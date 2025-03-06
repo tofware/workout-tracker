@@ -110,7 +110,8 @@ const submit = () => {
                 <form @submit.prevent="submit" class="m-3 max-w-lg">
                     <div class="mb-4">
                         <label for="weight" class="block text-sm font-medium text-gray-700">Weight</label>
-                        <input v-model="form.weight" id="weight" required placeholder="Enter your weight"
+                        <input v-model="form.weight" id="weight" type="number" step="0.1" required
+                            placeholder="Enter your weight"
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="mt-2 text-sm text-red-600" v-show="form.errors['weight']">
@@ -120,8 +121,8 @@ const submit = () => {
                     <div class="mb-4">
                         <label for="body_fat_percentage" class="block text-sm font-medium text-gray-700">Body fat
                             percentage</label>
-                        <input v-model="form.body_fat_percentage" id="body_fat_percentage" required
-                            placeholder="Enter your body fat percentage"
+                        <input v-model="form.body_fat_percentage" id="body_fat_percentage" required type="number"
+                            step="0.1" placeholder="Enter your body fat percentage"
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="mt-2 text-sm text-red-600" v-show="form.errors['body_fat_percentage']">
@@ -131,6 +132,7 @@ const submit = () => {
                     <div class="mb-4">
                         <label for="muscle_mass" class="block text-sm font-medium text-gray-700">Muscle mass</label>
                         <input v-model="form.muscle_mass" id="muscle_mass" required placeholder="Enter your muscle mass"
+                            type="number" step="0.1"
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="mt-2 text-sm text-red-600" v-show="form.errors['muscle_mass']">
@@ -139,7 +141,7 @@ const submit = () => {
 
                     <div class="mb-4">
                         <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
-                        <input v-model="form.notes" id="notes" required placeholder="Enter any additional notes"
+                        <input v-model="form.notes" id="notes" placeholder="Enter any additional notes"
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="mt-2 text-sm text-red-600" v-show="form.errors['notes']">

@@ -24,9 +24,9 @@ class StoreGoalRequest extends FormRequest
     {
         return [
             'exercise' => ['required', 'exists:App\Models\Exercise,id'],
-            'goal_type' => ['required', 'string', 'min:1', 'max:50'],
+            'goal_type' => ['required', 'string', 'min:1', 'max:100'],
             'target_value' => ['required', 'integer', 'min:1', 'max:1000'],
-            'deadline' => ['required', 'date'],
+            'deadline' => ['required', 'date', 'after_or_equal:today'],
             'notes' => ['nullable', 'string', 'min:1', 'max:100'],
         ];
     }

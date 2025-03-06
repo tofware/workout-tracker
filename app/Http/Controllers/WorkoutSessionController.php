@@ -14,14 +14,14 @@ class WorkoutSessionController extends Controller
     public function index()
     {
         return Inertia::render('WorkoutSession/Index', [
-            'sessions' => WorkoutSession::whereNotNull('duration')->get(),
+            'sessions' => WorkoutSession::whereNotNull('duration')->where('user_id', Auth::id())->get(),
         ]);
     }
 
     public function create()
     {
         return Inertia::render('WorkoutSession/Create', [
-            'workouts' => Workout::all(),
+            'workouts' => Workout::where('user_id', Auth::id())->get(),
         ]);
     }
 
@@ -29,7 +29,9 @@ class WorkoutSessionController extends Controller
     {
         $validated = $request->validated();
 
-        $workout = Workout::with('exercises')->find($validated['workout']);
+        $workout = Workout::with('exercises')
+        ->where('user_id', Auth::id())
+        ->find($validated['workout']);
 
         $workoutSession = WorkoutSession::create([
             'workout_id' => $validated['workout'],

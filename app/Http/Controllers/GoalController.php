@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\GoalStatus;
-use App\Http\Requests\StoreGoalRequest;
-use App\Models\Exercise;
 use App\Models\Goal;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\Exercise;
+use App\Enums\GoalStatus;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\StoreGoalRequest;
 
 class GoalController extends Controller
 {
@@ -19,9 +20,13 @@ class GoalController extends Controller
             return $goal;
         });
 
+        $exercises = Cache::remember('exercises', 60 * 60 * 24, function() {
+            return Exercise::select('id', 'name')->get();
+        });
+
         return Inertia::render('Goals/Index', [
             'goals' => $goals,
-            'exercises' => Exercise::all(),
+            'exercises' => $exercises,
         ]);
     }
 
