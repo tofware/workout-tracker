@@ -25,7 +25,7 @@ class ExerciseFactory extends Factory
             'force' => fake()->name,
             'mechanic' => fake()->name,
             'equipment_id' => Equipment::factory(),
-            'exercise_category_id' => ExerciseCategory::factory()
+            'exercise_category_id' => ExerciseCategory::factory(),
         ];
     }
 }

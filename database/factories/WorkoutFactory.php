@@ -21,7 +21,7 @@ class WorkoutFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'category_id' => WorkoutCategory::factory(),
+            'workout_category_id' => WorkoutCategory::factory(),
             'user_id' => User::factory(),
         ];
     }
