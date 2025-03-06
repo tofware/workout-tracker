@@ -45,7 +45,7 @@ class GoalTest extends TestCase
             'exercise' => $exercise->id,
             'goal_type' => fake()->text(10),
             'target_value' => fake()->numberBetween(1, 100),
-            'deadline' => fake()->date,
+            'deadline' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d H:i'),
             'status' => fake()->randomElement(array_keys(GoalStatus::cases())),
             'notes' => fake()->text(30),
         ];

@@ -18,7 +18,7 @@ class WorkoutTest extends TestCase
     public function test_workouts_page_is_displayed(): void
     {
         $user = User::factory()->create();
-        $workouts = Workout::factory(3)->create();
+        $workouts = Workout::factory(3)->create(['user_id' => $user->id]);
 
         $response = $this
             ->actingAs($user)
